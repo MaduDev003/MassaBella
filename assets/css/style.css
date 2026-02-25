@@ -1,0 +1,110 @@
+/* Reset básico */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --light-background: #EBEBEB;
+    --dark-background: #1C1C1C;
+    --legend-light: #686868;
+    --legend-dark: #6B7280;
+}
+
+body {
+    padding: 20px;
+    font-family: "Noto Serif", serif;
+}
+
+body.light {
+    background-color: var(--light-background);
+    color: var(--dark-background);
+}
+
+body.dark {
+    background-color: var(--dark-background);
+    color: var(--light-background);
+}
+
+main {
+    padding: 30px;
+}
+
+.menu {
+    padding-left: 45px;
+    display: flex;
+    gap: 50px;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    gap: 220px;
+}
+
+/* Cards */
+.pizza-card {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+/* Pizza images */
+.pizza-img {
+    width: 195px;
+    height: 195px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 7px;
+    position: relative; /* necessário para posicionar ícone */
+    border-radius: 12px;
+}
+
+/* Pizza background images */
+.pizza-img.margherita { background-image: url("../images/pizza.png"); }
+.pizza-img.pepperoni { background-image: url("../images/pizza2.png"); }
+.pizza-img.four-cheese { background-image: url("../images/pizza3.png"); }
+.pizza-img.vegetarian { background-image: url("../images/pizza4.png"); }
+.pizza-img.mexican { background-image: url("../images/pizza5.png"); }
+.pizza-img.sweet { background-image: url("../images/pizza7.png"); }
+
+.purchase {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;           /* move o canto esquerdo para o meio da pizza */
+    transform: translateX(-50%);  /* centraliza o ícone pela metade da sua largura */
+    cursor: pointer;
+}
+
+.purchase svg {
+    width: 45px;
+    height: 45px;
+    fill: #1C1C1C;
+    transition: 0.3s;
+}
+
+.purchase svg:hover {
+    transform: scale(1.2);
+}
+
+
+/* Text */
+.pizza-card h2 {
+    font-size: 17px;
+    color: var(--legend-light);
+}
+
+.pizza-card h3 {
+    font-size: 23px;
+}
+
+.pizza-card p {
+    max-width: 180px;
+    font-size: 15px;
+    color: var(--legend-light);
+    text-align: center;
+}

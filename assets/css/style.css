@@ -7,8 +7,8 @@
 :root {
     --light-background: #EBEBEB;
     --dark-background: #1C1C1C;
-    --legend-light: #686868;
-    --legend-dark: #6B7280;
+    --legend-light: #4e4d4d;
+    --legend-dark: #9a9faa;
 }
 
 body {
@@ -127,20 +127,29 @@ main {
     transform: scale(1.2);
 }
 
+
+.pizza-info.light {
+    color: var(--legend-light);
+}
+
+.pizza-info.dark {
+    color: var(--legend-dark);
+}
+
 .pizza-card h2 {
     margin-top: 5px;
     font-size: 17px;
-    color: var(--legend-light);
+    
 }
+
 
 .pizza-card h3 {
     font-size: 23px;
 }
 
 .pizza-card p {
-    max-width: 180px;
+    max-width: 220px;
     font-size: 15px;
-    color: var(--legend-light);
     text-align: center;
 }
 

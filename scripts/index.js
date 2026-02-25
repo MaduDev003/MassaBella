@@ -1,19 +1,15 @@
 function toggleTheme() {
-    const checkbox = document.getElementById("theme-checkbox");
-    const cart = document.querySelector(".cart-icon");
+    const isDark = document.getElementById("theme-checkbox").checked;
     const body = document.body;
-    if (checkbox.checked) {
-        body.classList.remove("light");
-        body.classList.add("dark");
+    const cart = document.querySelector(".cart-icon");
+    const prices = document.querySelectorAll(".pizza-info");
 
-        cart.classList.remove("light");
-        cart.classList.add("dark");
-    } else {
-        body.classList.remove("dark");
-        body.classList.add("light");
+    const toggleClass = (el, darkClass = "dark", lightClass = "light") => {
+        el.classList.toggle(darkClass, isDark);
+        el.classList.toggle(lightClass, !isDark);
+    };
 
-        cart.classList.remove("dark");
-        cart.classList.add("light");
-    
-    }
+    toggleClass(body);
+    toggleClass(cart);
+    prices.forEach(price => toggleClass(price));
 }

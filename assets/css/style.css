@@ -27,6 +27,40 @@ body.dark {
     color: var(--light-background);
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.count-pizzas {
+    display: flex;
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    background-color: red;
+    border-radius: 50%;
+    right: 46px;
+    z-index: 1;
+    top: 17px;
+}
+
+.count-pizzas p {
+    font-size: 12px;
+    color: white;
+    margin: auto;
+    font-weight: bold;
+}
+
+header div svg {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
 main {
     padding: 30px;
 }
@@ -43,7 +77,6 @@ main {
     gap: 220px;
 }
 
-/* Cards */
 .pizza-card {
     display: flex;
     align-items: center;
@@ -52,7 +85,6 @@ main {
     gap: 5px;
 }
 
-/* Pizza images */
 .pizza-img {
     width: 195px;
     height: 195px;
@@ -60,11 +92,10 @@ main {
     background-position: center;
     background-repeat: no-repeat;
     margin-bottom: 7px;
-    position: relative; /* necessário para posicionar ícone */
+    position: relative;
     border-radius: 12px;
 }
 
-/* Pizza background images */
 .pizza-img.margherita { background-image: url("../images/pizza.png"); }
 .pizza-img.pepperoni { background-image: url("../images/pizza2.png"); }
 .pizza-img.four-cheese { background-image: url("../images/pizza3.png"); }
@@ -75,14 +106,14 @@ main {
 .purchase {
     position: absolute;
     bottom: -20px;
-    left: 50%;           /* move o canto esquerdo para o meio da pizza */
-    transform: translateX(-50%);  /* centraliza o ícone pela metade da sua largura */
+    left: 50%;           
+    transform: translateX(-50%);  
     cursor: pointer;
 }
 
 .purchase svg {
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
     fill: #1C1C1C;
     transition: 0.3s;
 }
@@ -92,8 +123,8 @@ main {
 }
 
 
-/* Text */
 .pizza-card h2 {
+    margin-top: 5px;
     font-size: 17px;
     color: var(--legend-light);
 }

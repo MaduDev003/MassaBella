@@ -39,12 +39,14 @@ header {
     position: absolute;
     width: 17px;
     height: 17px;
-    background-color: red;
+    background-color: #1685CA;
     border-radius: 50%;
     right: 46px;
     z-index: 1;
     top: 17px;
+  
 }
+
 
 .count-pizzas p {
     font-size: 12px;
@@ -55,10 +57,11 @@ header {
 
 header div svg {
     position: relative;
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     cursor: pointer;
     transition: 0.3s;
+    stroke: var(--dark-background);
 }
 
 main {

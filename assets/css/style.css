@@ -16,6 +16,10 @@ body {
     font-family: "Noto Serif", serif;
 }
 
+#app.active {
+    opacity: 0.5;
+}
+
 body.light {
     background-color: var(--light-background);
     color: var(--dark-background);
@@ -51,6 +55,7 @@ header {
     margin: auto;
     font-weight: bold;
 }
+
 .cart-icon svg {
     stroke: #1C1C1C;
 }
@@ -66,9 +71,11 @@ header {
 .cart-icon .light {
     stroke: #1C1C1C;
 }
+
 main {
-    margin-top: 40px;
+    margin-top: 20px;
 }
+
 .menu {
     display: flex;
     align-items: center;
@@ -78,8 +85,10 @@ main {
 
 .container {
     display: flex;
-    gap: 220px;
+    gap: 190px;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 
 .pizza-card {
@@ -101,12 +110,29 @@ main {
     border-radius: 12px;
 }
 
-.pizza-img.margherita { background-image: url("../images/pizza.png"); }
-.pizza-img.pepperoni { background-image: url("../images/pizza2.png"); }
-.pizza-img.four-cheese { background-image: url("../images/pizza3.png"); }
-.pizza-img.vegetarian { background-image: url("../images/pizza4.png"); }
-.pizza-img.mexican { background-image: url("../images/pizza5.png"); }
-.pizza-img.sweet { background-image: url("../images/pizza7.png"); }
+.pizza-img.margherita {
+    background-image: url("../images/pizza.png");
+}
+
+.pizza-img.pepperoni {
+    background-image: url("../images/pizza2.png");
+}
+
+.pizza-img.four-cheese {
+    background-image: url("../images/pizza3.png");
+}
+
+.pizza-img.vegetarian {
+    background-image: url("../images/pizza4.png");
+}
+
+.pizza-img.mexican {
+    background-image: url("../images/pizza5.png");
+}
+
+.pizza-img.sweet {
+    background-image: url("../images/pizza7.png");
+}
 
 .purchase {
     position: absolute;
@@ -139,7 +165,7 @@ main {
 .pizza-card h2 {
     margin-top: 5px;
     font-size: 17px;
-    
+
 }
 
 
@@ -160,7 +186,7 @@ main {
     gap: 20px;
 }
 
-.details > * {
+.details>* {
     display: flex;
     align-items: center;
 }
@@ -206,6 +232,7 @@ main {
 .switch .sun {
     left: 6px;
 }
+
 .moon * {
     stroke: #567c8b;
 }
@@ -230,19 +257,121 @@ main {
     transition: transform 0.3s;
 }
 
-#theme-checkbox:checked + .switch {
+#theme-checkbox:checked+.switch {
     background: #585858;
 }
 
-#theme-checkbox:checked + .switch .slider {
+#theme-checkbox:checked+.switch .slider {
     transform: translateX(30px);
     background-color: #808080
 }
 
-#theme-checkbox:checked + .switch .sun {
+#theme-checkbox:checked+.switch .sun {
     opacity: 0.3;
 }
 
-#theme-checkbox:checked + .switch .moon {
+#theme-checkbox:checked+.switch .moon {
     opacity: 1;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 52%;
+    left: 50%;
+    flex-direction: row;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 70%;
+    background-color: #fcfcfc;
+    z-index: 2;
+    border-radius: 17px;
+    filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+
+}
+
+.choosed-pizza {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 45%;
+    height: 100%;
+    background-color: #1685CA;
+}
+
+.choosed-pizza img {
+    width: 85%;
+}
+
+.pizza-description {
+    width: 55%;
+    padding-top: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
+.pizza-description p {
+    font-size: 14px;
+    color: var(--legend-light);
+}
+
+.pizza-description p {
+    font-size: 14px;
+    color: var(--legend-light);
+}
+
+.sizes {
+    display: flex;
+    gap: 9px;
+    flex-direction: column;
+}
+
+
+.sizes h2 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #919090
+}
+
+.size-options div h3 {
+ color: var(--dark-background);
+}
+
+.size-options {
+    display: flex;
+    width: 90%; 
+    border-radius: 9px; 
+    overflow: hidden; 
+    height: 38px;
+}
+
+.size-options div:nth-child(1) {
+    background-color: #E3E3E3;
+    color: white;
+    flex: 1;
+}
+.size-options div:nth-child(2) {
+    background-color: #c4c4c4;
+    color: white;
+    flex: 1;
+}
+.size-options div:nth-child(3) {
+    background-color: #9e9d9d;
+    color: white;
+    flex: 1;
+}
+
+.size-options div {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.size-options div h3 {
+    font-size: 17px;
 }

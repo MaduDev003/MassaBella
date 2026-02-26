@@ -2,7 +2,7 @@ function toggleTheme() {
     const isDark = document.getElementById("theme-checkbox").checked;
     const body = document.body;
     const cart = document.querySelector(".cart-icon");
-    const prices = document.querySelectorAll(".pizza-info");
+    const pizzaInfo = document.querySelectorAll(".pizza-info");
 
     const toggleClass = (el, darkClass = "dark", lightClass = "light") => {
         el.classList.toggle(darkClass, isDark);
@@ -11,5 +11,22 @@ function toggleTheme() {
 
     toggleClass(body);
     toggleClass(cart);
-    prices.forEach(price => toggleClass(price));
+    pizzaInfo.forEach(info => toggleClass(info));
+}
+
+function buyPizza(pizzaName){
+    const modal = document.getElementById("modal");
+    modal.style.display = "flex";
+
+    const app = document.getElementById("app");
+    app.classList.add("active");
+}
+
+
+function closeModal() {
+    const app = document.getElementById("app");
+    app.classList.remove("active");
+
+    const modal = document.getElementById("modal");
+    modal.style.display = "none";
 }

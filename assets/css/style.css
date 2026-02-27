@@ -9,6 +9,7 @@
     --dark-background: #1C1C1C;
     --legend-light: #4e4d4d;
     --legend-dark: #9a9faa;
+    --primary-color: #1685CA;
 }
 
 body {
@@ -42,7 +43,7 @@ header {
     position: absolute;
     width: 20px;
     height: 20px;
-    background-color: #1685CA;
+    background-color: var(--primary-color);
     border-radius: 50%;
     right: 122px;
     top: 20px;
@@ -299,7 +300,6 @@ main {
     gap: 20px;
     width: 45%;
     height: 100%;
-    background-color: #1685CA;
 }
 
 .choosed-pizza img {
@@ -349,22 +349,6 @@ main {
     height: 38px;
 }
 
-.size-options div:nth-child(1) {
-    background-color: #E3E3E3;
-    color: white;
-    flex: 1;
-}
-.size-options div:nth-child(2) {
-    background-color: #c4c4c4;
-    color: white;
-    flex: 1;
-}
-.size-options div:nth-child(3) {
-    background-color: #9e9d9d;
-    color: white;
-    flex: 1;
-}
-
 .size-options div {
     display: flex;
     gap: 5px;
@@ -372,6 +356,43 @@ main {
     align-items: center;
 }
 
+/* Cores base diferentes */
+.size-options div:nth-child(1) {
+    background-color: #E3E3E3;
+    flex: 1;
+}
+.size-options div:nth-child(2) {
+    background-color: #c4c4c4;
+    flex: 1;
+}
+.size-options div:nth-child(3) {
+    background-color: #9e9d9d;
+    flex: 1;
+}
+
 .size-options div h3 {
     font-size: 17px;
+    color: var(--dark-background);
 }
+
+/* 🔥 HOVER (somente se NÃO estiver selecionado) */
+.size-options div:not(.selected-size):hover {
+    background-color: var(--primary-color);
+    cursor: pointer;
+}
+
+.size-options div:not(.selected-size):hover h3,
+.size-options div:not(.selected-size):hover p {
+    color: white;
+}
+
+/* 🏆 SELECIONADO — vem por último para vencer tudo */
+.size-options div.selected-size {
+    background-color: var(--primary-color);
+}
+
+.size-options div.selected-size h3,
+.size-options div.selected-size p {
+    color: white;
+}
+

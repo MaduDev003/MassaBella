@@ -39,7 +39,7 @@
                 <div class="container">
                     <div class="pizza-card">
                         <div class="pizza-img margherita">
-                            <div class="purchase" onclick="buyPizza('Mussarela')">
+                            <div class="purchase">
                                 <img src="assets/images/icons/add-to-cart.svg" alt="Adicionar ao carrinho"
                                     onload="SVGInject(this)" />
                             </div>
@@ -51,61 +51,57 @@
 
                     <div class="pizza-card">
                         <div class="pizza-img pepperoni">
-                            <div class="purchase" onclick="buyPizza('Calabresa')">
+                            <div class="purchase">
                                 <img src="assets/images/icons/add-to-cart.svg" alt="Adicionar ao carrinho"
                                     onload="SVGInject(this)" />
                             </div>
                         </div>
                         <h2 class="pizza-info light">R$ 24,90</h2>
                         <h3>Calabresa</h3>
-                        <p class="pizza-info light">Ingredientes: Molho de tomate, calabresa fatiada, cebola e orégano.
-                        </p>
+                        <p class="pizza-info light">Ingredientes: Molho de tomate, calabresa fatiada, cebola e orégano.</p>
                     </div>
 
                     <div class="pizza-card">
                         <div class="pizza-img four-cheese">
-                            <div class="purchase" onclick="buyPizza('Quatro Queijos')">
+                            <div class="purchase">
                                 <img src="assets/images/icons/add-to-cart.svg" alt="Adicionar ao carrinho"
                                     onload="SVGInject(this)" />
                             </div>
                         </div>
                         <h2 class="pizza-info light">R$ 24,90</h2>
                         <h3>Quatro Queijos</h3>
-                        <p class="pizza-info light">Ingredientes: Molho de tomate, mussarela, provolone, parmesão e
-                            gorgonzola.</p>
+                        <p class="pizza-info light">Ingredientes: Molho de tomate, mussarela, provolone, parmesão e gorgonzola.</p>
                     </div>
                 </div>
 
                 <div class="container">
                     <div class="pizza-card">
                         <div class="pizza-img vegetarian">
-                            <div class="purchase" onclick="buyPizza('Vegetariana')">
+                            <div class="purchase">
                                 <img src="assets/images/icons/add-to-cart.svg" alt="Adicionar ao carrinho"
                                     onload="SVGInject(this)" />
                             </div>
                         </div>
                         <h2 class="pizza-info light">R$ 30,90</h2>
                         <h3>Vegetariana</h3>
-                        <p class="pizza-info light">Ingredientes: Molho de tomate, mussarela, pimentão, cebola, azeitona
-                            e tomate.</p>
+                        <p class="pizza-info light">Ingredientes: Molho de tomate, mussarela, pimentão, cebola, azeitona e tomate.</p>
                     </div>
 
                     <div class="pizza-card">
                         <div class="pizza-img mexican">
-                            <div class="purchase" onclick="buyPizza('Mexicana')">
+                            <div class="purchase">
                                 <img src="assets/images/icons/add-to-cart.svg" alt="Adicionar ao carrinho"
                                     onload="SVGInject(this)" />
                             </div>
                         </div>
                         <h2 class="pizza-info light">R$ 30,90</h2>
                         <h3>Mexicana</h3>
-                        <p class="pizza-info light">Ingredientes: Molho de tomate, mussarela, carne temperada, pimenta
-                            jalapeño e cebola roxa.</p>
+                        <p class="pizza-info light">Ingredientes: Molho de tomate, mussarela, carne temperada, pimenta jalapeño e cebola roxa.</p>
                     </div>
 
                     <div class="pizza-card sweet">
                         <div class="pizza-img sweet">
-                            <div class="purchase" onclick="buyPizza('Doce')">
+                            <div class="purchase">
                                 <img src="assets/images/icons/add-to-cart.svg" alt="Adicionar ao carrinho"
                                     onload="SVGInject(this)" />
                             </div>
@@ -118,37 +114,38 @@
 
             </section>
         </main>
-
-        <script src="scripts/index.js"></script>
     </div>
+
     <div id="modal" class="modal">
         <div class="choosed-pizza">
-             <button onclick="closeModal()">X</button>
-           <img src="assets/images/pizza.png" alt="Pizza escolhida" />
+            <button onclick="closeModal()">X</button>
+            <img src="assets/images/pizza.png" alt="Pizza escolhida" />
         </div>
-        <div class="pizza-description"> 
+        <div class="pizza-description">
             <h1>Mussarela</h1>
             <p>Ingredientes: Molho de tomate, mussarela e orégano.</p>
-            
+
             <div class="sizes">
                 <h2>TAMANHO</h2>
                 <div class="size-options">
-                <div>
-                    <h3>Pequeno</h3>
-                    <p>100g</p>
-                </div>
-                <div>
-                    <h3>Médio</h3>
-                    <p>530g</p>
-                </div>
-                <div>
-                    <h3>Grande</h3>
-                    <p>880g</p>
-                </div>
+                    <div>
+                        <h3>Pequeno</h3>
+                        <p>100g</p>
+                    </div>
+                    <div>
+                        <h3>Médio</h3>
+                        <p>530g</p>
+                    </div>
+                    <div>
+                        <h3>Grande</h3>
+                        <p>880g</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="scripts/index.js"></script>
 </body>
 
 </html>

@@ -398,7 +398,7 @@ main {
     margin-top: 9px;
 }
 
-.add-more {
+.quantity {
     display: flex;
     gap: 10px;
     align-items: center;
@@ -418,7 +418,7 @@ main {
     font-weight: 400;
 }
 
-.add-more {
+.quantity {
     background-color: #E3E3E3;
     width: 80px;
     height: 25px;
@@ -426,11 +426,11 @@ main {
     display: flex;
 }
 
-.add-more button {
+.quantity button {
     flex: 3;
 }
 
-.add-more button {
+.quantity button {
     background-color: transparent;
     border: none;
     font-size: 16px;
@@ -439,20 +439,20 @@ main {
     justify-content: center;
 }
 
-.add-more h4 {
+.quantity h4 {
     flex: 1;
     font-size: 13px;
 }
 
-.add-more button p {
+.quantity button p {
     font-size: 20px;
 }
 
-.add-more button:nth-child(3) p {
+.quantity button:nth-child(3) p {
     margin-top: 2px;
 }
 
-.add-more button:hover {
+.quantity button:hover {
     background-color: #cecdcd;
     color: white;
     border-radius: 3px;

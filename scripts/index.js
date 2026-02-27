@@ -18,15 +18,20 @@ function toggleTheme() {
         .forEach(info => toggleClass(info));
 }
 
-
-function buyPizza(pizzaName) {
-  const modal = document.getElementById("modal");
-  const app = document.getElementById("app");
-
-  console.log("Pizza escolhida:", pizzaName);
+function selectedPizza(pizzaName, pizzaIngredients, price) {
+  const modalTitle = document.querySelector(".pizza-description h1");
+  const pizzaImage = document.querySelector(".choosed-pizza img");
+  const pizzaDetails = document.querySelector(".pizza-description p");
+  const priceElement = document.querySelector(".choosed-price h1");
 
   modal.style.display = "flex";
   app.classList.add("active");
+
+  modalTitle.textContent = pizzaName;
+  pizzaImage.src = `assets/images/${pizzaName.toLowerCase()}.png`;
+  pizzaImage.alt = pizzaName;
+  pizzaDetails.textContent = pizzaIngredients;
+  priceElement.textContent = price;
 }
 
 function closeModal() {
@@ -35,7 +40,6 @@ function closeModal() {
     sizeContainer.querySelectorAll("div")
         .forEach(option => option.classList.remove("selected-size"));
 }
-
 
 function chooseSize(sizeOption) {
     if (!sizeOption || !sizeContainer.contains(sizeOption)) return;
@@ -53,20 +57,23 @@ function chooseSize(sizeOption) {
     return { sizeName, sizeWeight };
 }
 
+
+
 if (sizeContainer) {
     sizeContainer.addEventListener("click", function (event) {
         const sizeOption = event.target.closest("div");
         chooseSize(sizeOption);
     });
 }
-
-
 menu.addEventListener("click", function (event) {
   const purchase = event.target.closest(".purchase");
   if (!purchase) return;
 
   const card = purchase.closest(".pizza-card");
-  const pizzaName = card.querySelector("h3").textContent;
 
-  buyPizza(pizzaName);
+  const pizzaName = card.querySelector("h3").textContent;
+  const pizzaIngredients = card.querySelector("p").textContent;
+  const price = card.querySelector("h2").textContent;
+
+  selectedPizza(pizzaName, pizzaIngredients, price);
 });

@@ -7,7 +7,7 @@
 :root {
     --light-background: #EBEBEB;
     --dark-background: #1C1C1C;
-    --legend-light: #4e4d4d;
+    --legend-light: #616060;
     --legend-dark: #9a9faa;
     --primary-color: #1685CA;
 }
@@ -112,27 +112,27 @@ main {
 }
 
 .pizza-img.margherita {
-    background-image: url("../images/pizza.png");
+    background-image: url("../images/margherita.png");
 }
 
-.pizza-img.pepperoni {
-    background-image: url("../images/pizza2.png");
+.pizza-img.portuguese {
+    background-image: url("../images/portuguesa.png");
 }
 
-.pizza-img.four-cheese {
-    background-image: url("../images/pizza3.png");
+.pizza-img.mushroom {
+    background-image: url("../images/cogumelo.png");
 }
 
 .pizza-img.vegetarian {
-    background-image: url("../images/pizza4.png");
+    background-image: url("../images/vegetariana.png");
 }
 
 .pizza-img.mexican {
-    background-image: url("../images/pizza5.png");
+    background-image: url("../images/mexicana.png");
 }
 
 .pizza-img.sweet {
-    background-image: url("../images/pizza7.png");
+    background-image: url("../images/doce.png");
 }
 
 .purchase {
@@ -314,10 +314,6 @@ main {
     gap: 17px;
 }
 
-.pizza-description p {
-    font-size: 14px;
-    color: var(--legend-light);
-}
 
 .pizza-description p {
     font-size: 14px;
@@ -326,26 +322,27 @@ main {
 
 .sizes {
     display: flex;
+    margin-top: 10px;
     gap: 9px;
     flex-direction: column;
 }
 
 
-.sizes h2 {
+.pizza-description div h2 {
     font-size: 16px;
     font-weight: 500;
     color: #919090
 }
 
 .size-options div h3 {
- color: var(--dark-background);
+    color: var(--dark-background);
 }
 
 .size-options {
     display: flex;
-    width: 90%; 
-    border-radius: 9px; 
-    overflow: hidden; 
+    width: 90%;
+    border-radius: 9px;
+    overflow: hidden;
     height: 38px;
 }
 
@@ -356,17 +353,18 @@ main {
     align-items: center;
 }
 
-/* Cores base diferentes */
 .size-options div:nth-child(1) {
     background-color: #E3E3E3;
     flex: 1;
 }
+
 .size-options div:nth-child(2) {
-    background-color: #c4c4c4;
+    background-color: #E3E3E3;
     flex: 1;
 }
+
 .size-options div:nth-child(3) {
-    background-color: #9e9d9d;
+    background-color: #E3E3E3;
     flex: 1;
 }
 
@@ -375,18 +373,13 @@ main {
     color: var(--dark-background);
 }
 
-/* 🔥 HOVER (somente se NÃO estiver selecionado) */
 .size-options div:not(.selected-size):hover {
-    background-color: var(--primary-color);
+    background-color: #cecdcd;
     cursor: pointer;
 }
 
-.size-options div:not(.selected-size):hover h3,
-.size-options div:not(.selected-size):hover p {
-    color: white;
-}
 
-/* 🏆 SELECIONADO — vem por último para vencer tudo */
+
 .size-options div.selected-size {
     background-color: var(--primary-color);
 }
@@ -396,3 +389,125 @@ main {
     color: white;
 }
 
+
+.purchase-details {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    width: 250px;
+    margin-top: 9px;
+}
+
+.add-more {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.increase-price h2 {
+    margin-top: 10px;
+}
+
+.choosed-price {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.choosed-price h1 {
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.add-more {
+    background-color: #E3E3E3;
+    width: 80px;
+    height: 25px;
+    border-radius: 5px;
+    display: flex;
+}
+
+.add-more button {
+    flex: 3;
+}
+
+.add-more button {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+
+.add-more h4 {
+    flex: 1;
+    font-size: 13px;
+}
+
+.add-more button p {
+    font-size: 20px;
+}
+
+.add-more button:nth-child(3) p {
+    margin-top: 2px;
+}
+
+.add-more button:hover {
+    background-color: #cecdcd;
+    color: white;
+    border-radius: 3px;
+}
+
+
+.modal-action {
+    width: 90%;
+    height: 55px;
+    display: flex;
+    gap: 40px;
+}
+
+button.cancel {
+    background-color: transparent;
+    border: none;
+    font-size: 12px;
+}
+
+button.confirm {
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    width: 228px;
+}
+
+.cancel p,
+.confirm p {
+    font-family: "Noto Serif", serif;
+}
+
+.confirm p {
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+    letter-spacing: 0.5px;
+}
+
+.cancel p {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--legend-light);
+    letter-spacing: 0.5px;
+}
+
+
+.confirm {
+    background-color: #3FC754;
+}
+
+
+.cancel {
+    background-color: transparent;
+}
+
+.confirm:hover, .cancel:hover{
+    opacity: 0.9;
+}

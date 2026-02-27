@@ -21,8 +21,7 @@
                 <div class="count-pizzas">
                     <p>7</p>
                 </div>
-                <img class="cart-icon" src="assets/images/icons/cart.svg" alt="Carrinho de compras"
-                    onload="SVGInject(this)" />
+                <img class="cart-icon" src="assets/images/icons/cart.svg" alt="Carrinho" onload="SVGInject(this)" />
                 <div class="theme-switch">
                     <input onchange="toggleTheme()" type="checkbox" id="theme-checkbox" />
                     <label for="theme-checkbox" class="switch">
@@ -36,41 +35,48 @@
 
         <main>
             <section class="menu">
+
                 <div class="container">
                     <div class="pizza-card">
                         <div class="pizza-img margherita">
                             <div class="purchase">
-                                <img src="assets/images/icons/add-to-cart.svg" alt="Adicionar ao carrinho"
+                                <img src="assets/images/icons/add-to-cart.svg" alt="Adicionar"
                                     onload="SVGInject(this)" />
                             </div>
                         </div>
-                        <h2 class="pizza-info light">R$ 18,90</h2>
-                        <h3>Mussarela</h3>
-                        <p class="pizza-info light">Ingredientes: Molho de tomate, mussarela e orégano.</p>
+                        <h2 class="pizza-info light price">R$ 18,90</h2>
+                        <h3>Margherita</h3>
+                        <p class="pizza-info light">
+                            Molho de tomate, mussarela, tomate e azeitona.
+                        </p>
                     </div>
 
                     <div class="pizza-card">
-                        <div class="pizza-img pepperoni">
+                        <div class="pizza-img portuguese">
                             <div class="purchase">
-                                <img src="assets/images/icons/add-to-cart.svg" alt="Adicionar ao carrinho"
+                                <img src="assets/images/icons/add-to-cart.svg" alt="Adicionar"
                                     onload="SVGInject(this)" />
                             </div>
                         </div>
-                        <h2 class="pizza-info light">R$ 24,90</h2>
-                        <h3>Calabresa</h3>
-                        <p class="pizza-info light">Ingredientes: Molho de tomate, calabresa fatiada, cebola e orégano.</p>
+                        <h2 class="pizza-info light price">R$ 24,90</h2>
+                        <h3>Portuguesa</h3>
+                        <p class="pizza-info light">
+                            Presunto, mussarela, pimentão, tomate, cebola e azeitona.
+                        </p>
                     </div>
 
                     <div class="pizza-card">
-                        <div class="pizza-img four-cheese">
+                        <div class="pizza-img mushroom">
                             <div class="purchase">
-                                <img src="assets/images/icons/add-to-cart.svg" alt="Adicionar ao carrinho"
+                                <img src="assets/images/icons/add-to-cart.svg" alt="Adicionar"
                                     onload="SVGInject(this)" />
                             </div>
                         </div>
-                        <h2 class="pizza-info light">R$ 24,90</h2>
-                        <h3>Quatro Queijos</h3>
-                        <p class="pizza-info light">Ingredientes: Molho de tomate, mussarela, provolone, parmesão e gorgonzola.</p>
+                        <h2 class="pizza-info light price">R$ 24,90</h2>
+                        <h3>Cogumelo</h3>
+                        <p class="pizza-info light">
+                            Mussarela, tomate, azeitona preta e cogumelos refogados.
+                        </p>
                     </div>
                 </div>
 
@@ -78,37 +84,43 @@
                     <div class="pizza-card">
                         <div class="pizza-img vegetarian">
                             <div class="purchase">
-                                <img src="assets/images/icons/add-to-cart.svg" alt="Adicionar ao carrinho"
+                                <img src="assets/images/icons/add-to-cart.svg" alt="Adicionar"
                                     onload="SVGInject(this)" />
                             </div>
                         </div>
-                        <h2 class="pizza-info light">R$ 30,90</h2>
+                        <h2 class="pizza-info light price">R$ 30,90</h2>
                         <h3>Vegetariana</h3>
-                        <p class="pizza-info light">Ingredientes: Molho de tomate, mussarela, pimentão, cebola, azeitona e tomate.</p>
+                        <p class="pizza-info light">
+                            Brócolis, mussarela, tomate, azeitona, orégano e cogumelo.
+                        </p>
                     </div>
 
                     <div class="pizza-card">
                         <div class="pizza-img mexican">
                             <div class="purchase">
-                                <img src="assets/images/icons/add-to-cart.svg" alt="Adicionar ao carrinho"
+                                <img src="assets/images/icons/add-to-cart.svg" alt="Adicionar"
                                     onload="SVGInject(this)" />
                             </div>
                         </div>
-                        <h2 class="pizza-info light">R$ 30,90</h2>
+                        <h2 class="pizza-info light price">R$ 30,90</h2>
                         <h3>Mexicana</h3>
-                        <p class="pizza-info light">Ingredientes: Molho de tomate, mussarela, carne temperada, pimenta jalapeño e cebola roxa.</p>
+                        <p class="pizza-info light">
+                            Carne temperada, pimenta, milho e queijo.
+                        </p>
                     </div>
 
-                    <div class="pizza-card sweet">
+                    <div class="pizza-card">
                         <div class="pizza-img sweet">
                             <div class="purchase">
-                                <img src="assets/images/icons/add-to-cart.svg" alt="Adicionar ao carrinho"
+                                <img src="assets/images/icons/add-to-cart.svg" alt="Adicionar"
                                     onload="SVGInject(this)" />
                             </div>
                         </div>
-                        <h2 class="pizza-info light">R$ 35,90</h2>
+                        <h2 class="pizza-info light price">R$ 35,90</h2>
                         <h3>Doce</h3>
-                        <p class="pizza-info light">Ingredientes: Chocolate ao leite, M&M’s e leite condensado.</p>
+                        <p class="pizza-info light">
+                            Chocolate, M&M e leite condensado.
+                        </p>
                     </div>
                 </div>
 
@@ -118,12 +130,11 @@
 
     <div id="modal" class="modal">
         <div class="choosed-pizza">
-            <button onclick="closeModal()">X</button>
-            <img src="assets/images/pizza.png" alt="Pizza escolhida" />
+            <img src="assets/images/marguerita.png" alt="Pizza escolhida" />
         </div>
         <div class="pizza-description">
             <h1>Mussarela</h1>
-            <p>Ingredientes: Molho de tomate, mussarela e orégano.</p>
+            <p>Molho de tomate, mussarela e orégano.</p>
 
             <div class="sizes">
                 <h2>TAMANHO</h2>
@@ -141,6 +152,26 @@
                         <p>880g</p>
                     </div>
                 </div>
+            </div>
+
+            <div class="increase-price">
+                <h2>PREÇO</h2>
+                <div class="purchase-details">
+                    <div class="choosed-price"><h1>R$ 20,90</h1></div>
+                    <div class="add-more">
+                        <button>
+                            <p>-</p>
+                        </button>
+                        <h4>1</h4>
+                        <button>
+                            <p>+</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-action">
+                <button class="confirm"><p>Adicionar Ao Carrinho</p></button>
+                <button class="cancel" onclick="closeModal()"><p>Cancelar</p></button>
             </div>
         </div>
     </div>

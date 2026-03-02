@@ -21,7 +21,8 @@
                 <div id="count-pizzas" class="count-pizzas">
                     <p>0</p>
                 </div>
-                <img class="cart-icon" src="assets/images/icons/cart.svg" alt="Carrinho" onload="SVGInject(this)" />
+                <img onclick="showCartResume()" class="cart-icon" src="assets/images/icons/cart.svg" alt="Carrinho"
+                    onload="SVGInject(this)" />
                 <div class="theme-switch">
                     <input onchange="toggleTheme()" type="checkbox" id="theme-checkbox" />
                     <label for="theme-checkbox" class="switch">
@@ -126,6 +127,14 @@
 
             </section>
         </main>
+
+
+        <aside>
+            <div class="aside-header">
+                <h2 class="cart-info">Barra Lateral</h2>
+                <h4 onclick="closeCartResume()">X</h4>
+            </div>
+        </aside>
     </div>
 
     <div id="modal" class="modal">
@@ -157,7 +166,9 @@
             <div class="increase-price">
                 <h2>PREÇO</h2>
                 <div class="purchase-details">
-                    <div id="price" class="choosed-price"><h1>R$ 20,90</h1></div>
+                    <div id="price" class="choosed-price">
+                        <h1>R$ 20,90</h1>
+                    </div>
                     <div class="quantity">
                         <button>
                             <p>-</p>
@@ -170,11 +181,16 @@
                 </div>
             </div>
             <div class="modal-action">
-                <button id="add-to-cart" class="confirm disabled" onclick="addToCart()"><p>Adicionar Ao Carrinho</p></button>
-                <button class="cancel" onclick="closeModal()"><p>Cancelar</p></button>
+                <button id="add-to-cart" class="confirm disabled" onclick="addToCart()">
+                    <p>Adicionar Ao Carrinho</p>
+                </button>
+                <button class="cancel" onclick="closeModal()">
+                    <p>Cancelar</p>
+                </button>
             </div>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="scripts/index.js"></script>
 </body>

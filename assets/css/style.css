@@ -286,7 +286,7 @@ main {
     width: 70%;
     height: 70%;
     background-color: #fcfcfc;
-    z-index: 2;
+    z-index: 4;
     border-radius: 17px;
     filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
 
@@ -472,6 +472,10 @@ button.cancel {
     font-size: 12px;
 }
 
+button.cancel p {
+    color: var(--legend-dark);
+}
+
 button.confirm {
     border: none;
     cursor: pointer;
@@ -565,4 +569,35 @@ button.confirm {
 
 
 
+/* ASIDE BAR */
 
+aside {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width:30vw; 
+    height: 100vh;
+    background-color: #f5f5f5;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    display: none;
+    z-index: 3;
+}
+
+body.cart-open aside {
+    display: flex;
+}
+
+body.cart-open .menu {
+    align-items: flex-start;
+    padding-left: 30px;
+    width: 70vw;
+}
+
+body.cart-open .container {
+    gap: 0px;
+    width: 62vw;
+    justify-content: space-between;
+}

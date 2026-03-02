@@ -6,7 +6,8 @@ const quantityContainer = document.querySelector(".quantity");
 const quantityDisplay = quantityContainer.querySelector("h4");
 const priceElement = document.querySelector(".choosed-price h1");
 const addToCartButton = document.getElementById("add-to-cart");
-console.log(typeof Swal);
+const asideBar = document.getElementsByTagName("aside");
+
 let basePrice = 0;
 let currentQuantity = 1;
 let selectedSize = null;
@@ -21,6 +22,7 @@ function toggleTheme() {
     };
 
     toggleClass(document.body);
+    toggleClass(document.querySelector(".cancel p"));
     toggleClass(document.getElementById("modal"));
     toggleClass(document.querySelector(".cart-icon"));
     toggleClass(document.getElementById("pizza-quantity"));
@@ -47,11 +49,7 @@ function toggleTheme() {
     document.querySelectorAll(".quantity button")
         .forEach(toggleClass);
     
-       
-
-
 }
-
 
 function openModal() {
     modal.style.display = "flex";
@@ -70,7 +68,6 @@ function closeModal() {
     addToCartButton.classList.add("disabled");
     selectedSize = null;
 }
-
 
 function selectedPizza(card) {
     const pizzaName = card.querySelector("h3").textContent;
@@ -107,13 +104,11 @@ function chooseSize(sizeOption) {
     addToCartButton.classList.remove("disabled");
 }
 
-
 function updatePrice() {
     const finalPrice = basePrice * currentQuantity;
     priceElement.textContent =
         `R$ ${finalPrice.toFixed(2).replace(".", ",")}`;
 }
-
 
 function controlQuantity(button) {
     const action = button.textContent.trim();
@@ -124,7 +119,6 @@ function controlQuantity(button) {
     quantityDisplay.textContent = currentQuantity;
     updatePrice();
 }
-
 
 function addToCart() {
  if (!selectedSize) {
@@ -150,6 +144,20 @@ function addToCart() {
     counter.textContent = pizzaCount + currentQuantity;
 
     closeModal();
+}
+
+function showCartResume(){
+    asideBar[0].style.display = "flex";
+
+   document.body.classList.add("cart-open");
+
+}
+
+function closeCartResume() {
+    asideBar[0].style.display = "none";
+
+    document.body.classList.remove("cart-open");
+
 }
 
 if (sizeContainer) {

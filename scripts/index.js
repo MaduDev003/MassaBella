@@ -21,10 +21,35 @@ function toggleTheme() {
     };
 
     toggleClass(document.body);
+    toggleClass(document.getElementById("modal"));
     toggleClass(document.querySelector(".cart-icon"));
+    toggleClass(document.getElementById("pizza-quantity"));
+    toggleClass(document.querySelector(".pizza-description p"));
+    toggleClass(document.querySelector(".quantity"));
+    toggleClass(document.querySelector(".choosed-price h1"));
+    toggleClass(document.getElementById("pizza-quantity"))
 
     document.querySelectorAll(".pizza-info")
         .forEach(toggleClass);
+
+    document.querySelectorAll(".size-options div")
+        .forEach(toggleClass);
+
+    document.querySelectorAll(".size-options div h3")
+        .forEach(toggleClass);
+
+    document.querySelectorAll(".size-options div p")
+        .forEach(toggleClass);
+
+    document.querySelectorAll(".quantity button p")
+        .forEach(toggleClass);
+
+    document.querySelectorAll(".quantity button")
+        .forEach(toggleClass);
+    
+       
+
+
 }
 
 
@@ -76,16 +101,16 @@ function chooseSize(sizeOption) {
     sizeContainer.querySelectorAll("div")
         .forEach(div => div.classList.remove("selected-size"));
     sizeOption.classList.add("selected-size");
-    
+
     selectedSize = sizeOption.querySelector("h3").textContent;
-    
+
     addToCartButton.classList.remove("disabled");
 }
 
 
 function updatePrice() {
     const finalPrice = basePrice * currentQuantity;
-    priceElement.textContent = 
+    priceElement.textContent =
         `R$ ${finalPrice.toFixed(2).replace(".", ",")}`;
 }
 
@@ -102,7 +127,7 @@ function controlQuantity(button) {
 
 
 function addToCart() {
-  if (!selectedSize) {
+    if (!selectedSize) {
         Swal.fire({
             icon: "warning",
             title: "Oops...",

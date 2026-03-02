@@ -517,3 +517,52 @@ button.confirm {
     opacity: 0.5;
     cursor: not-allowed;
 }
+
+#modal.dark {
+    background-color: #2c2c2c;
+}
+
+.pizza-description p.dark {
+    color: var(--legend-dark);
+}
+
+.size-options div.dark{
+     background-color: #616161;
+} 
+
+.size-options div.dark:not(.selected-size):hover {
+    background-color: #7a7a7a;
+    cursor: pointer;
+}
+
+.size-options div.selected-size.dark {
+    background-color: var(--primary-color);
+}
+
+.size-options div h3.dark {
+    color: var(--light-background);
+}
+
+.size-options div p.dark {
+    color: var(--light-background);
+}
+
+.quantity.dark {
+    background-color: #616161;
+}
+
+.quantity button p.dark {
+    color: var(--light-background);
+}
+
+.quantity button.dark:hover {
+    background-color: #7a7a7a;
+}
+
+#pizza-quantity.dark {
+    color: var(--light-background);
+}
+
+
+
+

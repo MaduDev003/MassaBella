@@ -18,8 +18,8 @@
         <header>
             <h1>Massa Bella</h1>
             <div class="details">
-                <div class="count-pizzas">
-                    <p>7</p>
+                <div id="count-pizzas" class="count-pizzas">
+                    <p>0</p>
                 </div>
                 <img class="cart-icon" src="assets/images/icons/cart.svg" alt="Carrinho" onload="SVGInject(this)" />
                 <div class="theme-switch">
@@ -157,12 +157,12 @@
             <div class="increase-price">
                 <h2>PREÇO</h2>
                 <div class="purchase-details">
-                    <div class="choosed-price"><h1>R$ 20,90</h1></div>
+                    <div id="price" class="choosed-price"><h1>R$ 20,90</h1></div>
                     <div class="quantity">
                         <button>
                             <p>-</p>
                         </button>
-                        <h4>1</h4>
+                        <h4 id="quantity">1</h4>
                         <button>
                             <p>+</p>
                         </button>
@@ -170,12 +170,12 @@
                 </div>
             </div>
             <div class="modal-action">
-                <button class="confirm"><p>Adicionar Ao Carrinho</p></button>
+                <button id="add-to-cart" class="confirm disabled" onclick="addToCart()"><p>Adicionar Ao Carrinho</p></button>
                 <button class="cancel" onclick="closeModal()"><p>Cancelar</p></button>
             </div>
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="scripts/index.js"></script>
 </body>
 

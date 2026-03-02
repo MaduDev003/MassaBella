@@ -511,3 +511,9 @@ button.confirm {
 .confirm:hover, .cancel:hover{
     opacity: 0.9;
 }
+
+#add-to-cart.disabled {
+    background-color: var(--legend-light);
+    opacity: 0.5;
+    cursor: not-allowed;
+}

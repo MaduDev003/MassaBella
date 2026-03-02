@@ -5,9 +5,11 @@ const menu = document.querySelector(".menu");
 const quantityContainer = document.querySelector(".quantity");
 const quantityDisplay = quantityContainer.querySelector("h4");
 const priceElement = document.querySelector(".choosed-price h1");
-
+const addToCartButton = document.getElementById("add-to-cart");
+console.log(typeof Swal);
 let basePrice = 0;
 let currentQuantity = 1;
+let selectedSize = null;
 
 
 function toggleTheme() {
@@ -29,6 +31,8 @@ function toggleTheme() {
 function openModal() {
     modal.style.display = "flex";
     app.classList.add("active");
+    addToCartButton.classList.add("disabled");
+    selectedSize = null;
 }
 
 function closeModal() {
@@ -37,6 +41,9 @@ function closeModal() {
 
     sizeContainer.querySelectorAll("div")
         .forEach(option => option.classList.remove("selected-size"));
+
+    addToCartButton.classList.add("disabled");
+    selectedSize = null;
 }
 
 
@@ -68,31 +75,52 @@ function chooseSize(sizeOption) {
 
     sizeContainer.querySelectorAll("div")
         .forEach(div => div.classList.remove("selected-size"));
-
     sizeOption.classList.add("selected-size");
+    
+    selectedSize = sizeOption.querySelector("h3").textContent;
+    
+    addToCartButton.classList.remove("disabled");
 }
 
 
 function updatePrice() {
     const finalPrice = basePrice * currentQuantity;
-    priceElement.textContent = `R$ ${finalPrice.toFixed(2).replace(".", ",")}`;
+    priceElement.textContent = 
+        `R$ ${finalPrice.toFixed(2).replace(".", ",")}`;
 }
+
 
 function controlQuantity(button) {
     const action = button.textContent.trim();
 
-    if (action === "+" ) {
-        currentQuantity++;
-    }
-
-    if (action === "-" && currentQuantity > 1) {
-        currentQuantity--;
-    }
+    if (action === "+") currentQuantity++;
+    if (action === "-" && currentQuantity > 1) currentQuantity--;
 
     quantityDisplay.textContent = currentQuantity;
     updatePrice();
 }
 
+
+function addToCart() {
+  if (!selectedSize) {
+        Swal.fire({
+            icon: "warning",
+            title: "Oops...",
+            text: "Por favor, selecione um tamanho para a pizza.",
+            confirmButtonColor: "#22c55e"
+        });
+        return;
+    }
+
+    const counter = document
+        .getElementById("count-pizzas")
+        .querySelector("p");
+
+    const pizzaCount = parseInt(counter.textContent);
+    counter.textContent = pizzaCount + currentQuantity;
+
+    closeModal();
+}
 
 if (sizeContainer) {
     sizeContainer.addEventListener("click", (event) => {

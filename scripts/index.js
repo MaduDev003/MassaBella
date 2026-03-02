@@ -127,15 +127,20 @@ function controlQuantity(button) {
 
 
 function addToCart() {
-    if (!selectedSize) {
-        Swal.fire({
-            icon: "warning",
-            title: "Oops...",
-            text: "Por favor, selecione um tamanho para a pizza.",
-            confirmButtonColor: "#22c55e"
-        });
-        return;
-    }
+ if (!selectedSize) {
+    const isDark = document.body.classList.contains("dark");
+    Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        text: "Por favor, selecione um tamanho para a pizza.",
+        background: isDark ? "#2b2b2b" : "#ffffff",
+        color: isDark ? "#ffffff" : "#1f1f1f",
+        confirmButtonColor: "#22c55e"
+    });
+    return;
+}
+
+   
 
     const counter = document
         .getElementById("count-pizzas")

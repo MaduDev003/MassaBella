@@ -25,11 +25,9 @@ function toggleTheme() {
     toggleClass(document.querySelector(".cancel p"));
     toggleClass(document.getElementById("modal"));
     toggleClass(document.querySelector(".cart-icon"));
-    toggleClass(document.getElementById("pizza-quantity"));
     toggleClass(document.querySelector(".pizza-description p"));
-    toggleClass(document.querySelector(".quantity"));
     toggleClass(document.querySelector(".choosed-price h1"));
-    toggleClass(document.getElementById("pizza-quantity"))
+    toggleClass(document.querySelector("aside"));
 
     document.querySelectorAll(".pizza-info")
         .forEach(toggleClass);
@@ -48,7 +46,13 @@ function toggleTheme() {
 
     document.querySelectorAll(".quantity button")
         .forEach(toggleClass);
-    
+
+    document.querySelectorAll(".pizza-quantity")
+        .forEach(toggleClass);
+
+    document.querySelectorAll(".quantity")
+        .forEach(toggleClass);
+
 }
 
 function openModal() {
@@ -120,36 +124,10 @@ function controlQuantity(button) {
     updatePrice();
 }
 
-function addToCart() {
- if (!selectedSize) {
-    const isDark = document.body.classList.contains("dark");
-    Swal.fire({
-        icon: "warning",
-        title: "Oops...",
-        text: "Por favor, selecione um tamanho para a pizza.",
-        background: isDark ? "#2b2b2b" : "#ffffff",
-        color: isDark ? "#ffffff" : "#1f1f1f",
-        confirmButtonColor: "#22c55e"
-    });
-    return;
-}
-
-   
-
-    const counter = document
-        .getElementById("count-pizzas")
-        .querySelector("p");
-
-    const pizzaCount = parseInt(counter.textContent);
-    counter.textContent = pizzaCount + currentQuantity;
-
-    closeModal();
-}
-
-function showCartResume(){
+function showCartResume() {
     asideBar[0].style.display = "flex";
 
-   document.body.classList.add("cart-open");
+    document.body.classList.add("cart-open");
 
 }
 
@@ -159,6 +137,35 @@ function closeCartResume() {
     document.body.classList.remove("cart-open");
 
 }
+
+function addToCart() {
+    if (!selectedSize) {
+        const isDark = document.body.classList.contains("dark");
+        Swal.fire({
+            icon: "warning",
+            title: "Oops...",
+            text: "Por favor, selecione um tamanho para a pizza.",
+            background: isDark ? "#2b2b2b" : "#ffffff",
+            color: isDark ? "#ffffff" : "#1f1f1f",
+            confirmButtonColor: "#22c55e"
+        });
+
+        return;
+    }
+
+
+
+    const counter = document
+        .getElementById("count-pizzas")
+        .querySelector("p");
+
+    const pizzaCount = parseInt(counter.textContent);
+    counter.textContent = pizzaCount + currentQuantity;
+    showCartResume();
+    closeModal();
+}
+
+
 
 if (sizeContainer) {
     sizeContainer.addEventListener("click", (event) => {
@@ -175,9 +182,17 @@ menu.addEventListener("click", (event) => {
     selectedPizza(card);
 });
 
-quantityContainer.addEventListener("click", (event) => {
-    const button = event.target.closest("button");
+document.addEventListener("click", function (event) {
+    const button = event.target.closest(".quantity button");
     if (!button) return;
 
-    controlQuantity(button);
+    const quantityContainer = button.closest(".quantity");
+    const display = quantityContainer.querySelector("h4");
+
+    let value = parseInt(display.textContent);
+
+    if (button.textContent.trim() === "+") value++;
+    if (button.textContent.trim() === "-" && value > 1) value--;
+
+    display.textContent = value;
 });

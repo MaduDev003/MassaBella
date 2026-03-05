@@ -11,6 +11,8 @@ let basePrice = 0;
 let currentQuantity = 1;
 let selectedSize = null;
 
+let pizzaFlavor = "";
+let pizzas = [];
 
 
 function toggleTheme() {
@@ -71,12 +73,12 @@ function closeModal() {
 }
 
 
-
 function selectedPizza(card) {
     const pizzaName = card.querySelector("h3").textContent;
     const ingredients = card.querySelector("p").textContent;
     const priceText = card.querySelector("h2").textContent;
 
+    pizzaFlavor = pizzaName; 
     basePrice = parseFloat(priceText.replace("R$ ", "").replace(",", "."));
     currentQuantity = 1;
 
@@ -93,8 +95,6 @@ function selectedPizza(card) {
     openModal();
 }
 
-
-
 function chooseSize(option) {
     if (!option) return;
 
@@ -106,8 +106,31 @@ function chooseSize(option) {
     selectedSize = option.querySelector("h3").textContent;
 
     addToCartButton.classList.remove("disabled");
-}
 
+}
+function mountPizza() {
+    const flavor = pizzaFlavor.toLowerCase();
+    const size = selectedSize[0];
+    const quantity = currentQuantity;
+    const price = basePrice * quantity;
+
+    if (!pizzas[flavor]) {
+        pizzas[flavor] = {};
+    }
+
+    if (!pizzas[flavor][size]) {
+        pizzas[flavor][size] = {
+            quantity: quantity,
+            price: price
+        };
+    } else {
+        pizzas[flavor][size].quantity += quantity;
+        pizzas[flavor][size].price += price;
+
+    }
+
+    console.log(pizzas);
+}
 
 
 function updatePrice() {
@@ -115,6 +138,7 @@ function updatePrice() {
 
     priceElement.textContent =
         `R$ ${finalPrice.toFixed(2).replace(".", ",")}`;
+        
 }
 
 
@@ -159,6 +183,8 @@ function addToCart() {
             confirmButtonColor: "#22c55e"
         });
 
+       
+
         return;
     }
 
@@ -168,7 +194,8 @@ function addToCart() {
     const pizzaCount = parseInt(counter.textContent);
 
     counter.textContent = pizzaCount + currentQuantity;
-
+    
+    mountPizza();
     showCartResume();
     closeModal();
 }

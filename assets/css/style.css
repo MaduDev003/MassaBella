@@ -711,3 +711,11 @@ hr:nth-child(3){
     align-items: center;
     justify-content: center;
 }
+
+.resume-info hr.dark {
+    background-color: #616161;
+}
+
+.info h3.dark {
+    color: #616161 ;
+}

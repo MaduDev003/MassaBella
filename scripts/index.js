@@ -12,7 +12,14 @@ let currentQuantity = 1;
 let selectedSize = null;
 
 let pizzaFlavor = "";
-let pizzas = [];
+let pizzas = {};
+
+const SIZE_PRICE = {
+    P: -7.50,
+    M: 0,
+    G: 7.50
+};
+
 
 
 function toggleTheme() {
@@ -49,8 +56,6 @@ function toggleTheme() {
     });
 }
 
-
-
 function openModal() {
     modal.style.display = "flex";
     app.classList.add("active");
@@ -58,27 +63,12 @@ function openModal() {
     selectedSize = null;
     addToCartButton.classList.add("disabled");
 }
-
-
-
-function closeModal() {
-    modal.style.display = "none";
-    app.classList.remove("active");
-
-    sizeContainer.querySelectorAll("div")
-        .forEach(div => div.classList.remove("selected-size"));
-
-    selectedSize = null;
-    addToCartButton.classList.add("disabled");
-}
-
-
 function selectedPizza(card) {
     const pizzaName = card.querySelector("h3").textContent;
     const ingredients = card.querySelector("p").textContent;
     const priceText = card.querySelector("h2").textContent;
 
-    pizzaFlavor = pizzaName; 
+    pizzaFlavor = pizzaName;
     basePrice = parseFloat(priceText.replace("R$ ", "").replace(",", "."));
     currentQuantity = 1;
 
@@ -95,6 +85,13 @@ function selectedPizza(card) {
     openModal();
 }
 
+function getPizzaPrice() {
+    if (!selectedSize) return basePrice;
+
+    const size = selectedSize[0];
+    return basePrice + SIZE_PRICE[size];
+}
+
 function chooseSize(option) {
     if (!option) return;
 
@@ -105,14 +102,19 @@ function chooseSize(option) {
 
     selectedSize = option.querySelector("h3").textContent;
 
-    addToCartButton.classList.remove("disabled");
+    updatePrice();
 
+    addToCartButton.classList.remove("disabled");
 }
+
 function mountPizza() {
+
     const flavor = pizzaFlavor.toLowerCase();
     const size = selectedSize[0];
     const quantity = currentQuantity;
-    const price = basePrice * quantity;
+
+    const unitPrice = getPizzaPrice();
+    const price = unitPrice * quantity;
 
     if (!pizzas[flavor]) {
         pizzas[flavor] = {};
@@ -126,48 +128,28 @@ function mountPizza() {
     } else {
         pizzas[flavor][size].quantity += quantity;
         pizzas[flavor][size].price += price;
-
     }
 
     console.log(pizzas);
 }
 
-
 function updatePrice() {
-    const finalPrice = basePrice * currentQuantity;
+
+    const unitPrice = getPizzaPrice();
+    const finalPrice = unitPrice * currentQuantity;
 
     priceElement.textContent =
         `R$ ${finalPrice.toFixed(2).replace(".", ",")}`;
-        
 }
 
-
-
 function changeQuantity(action) {
-    console.log('fui chamado')
+
     if (action === "+") currentQuantity++;
     if (action === "-" && currentQuantity > 1) currentQuantity--;
 
     quantityDisplay.textContent = currentQuantity;
     updatePrice();
 }
-
-
-
-function showCartResume() {
-    aside.style.display = "flex";
-    document.body.classList.add("cart-open");
-}
-
-
-
-function closeCartResume() {
-    aside.style.display = "none";
-    document.body.classList.remove("cart-open");
-}
-
-
-
 function addToCart() {
 
     if (!selectedSize) {
@@ -183,8 +165,6 @@ function addToCart() {
             confirmButtonColor: "#22c55e"
         });
 
-       
-
         return;
     }
 
@@ -194,20 +174,37 @@ function addToCart() {
     const pizzaCount = parseInt(counter.textContent);
 
     counter.textContent = pizzaCount + currentQuantity;
-    
+
     mountPizza();
     showCartResume();
     closeModal();
 }
 
+function closeModal() {
+    modal.style.display = "none";
+    app.classList.remove("active");
 
+    sizeContainer.querySelectorAll("div")
+        .forEach(div => div.classList.remove("selected-size"));
+
+    selectedSize = null;
+    addToCartButton.classList.add("disabled");
+}
+
+function showCartResume() {
+    aside.style.display = "flex";
+    document.body.classList.add("cart-open");
+}
+
+function closeCartResume() {
+    aside.style.display = "none";
+    document.body.classList.remove("cart-open");
+}
 
 sizeContainer?.addEventListener("click", (event) => {
     const option = event.target.closest("div");
     chooseSize(option);
 });
-
-
 
 menu.addEventListener("click", (event) => {
 
@@ -218,8 +215,6 @@ menu.addEventListener("click", (event) => {
 
     selectedPizza(card);
 });
-
-
 
 document.addEventListener("click", (event) => {
 
@@ -242,5 +237,4 @@ document.addEventListener("click", (event) => {
         currentQuantity = value;
         updatePrice();
     }
-
 });

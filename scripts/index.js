@@ -1,3 +1,5 @@
+import Pizza from "./classes/Pizza.js";
+
 const sizeContainer = document.querySelector(".size-options");
 const modal = document.getElementById("modal");
 const app = document.getElementById("app");
@@ -6,21 +8,17 @@ const quantityDisplay = modal.querySelector(".pizza-quantity");
 const priceElement = document.querySelector(".choosed-price h1");
 const addToCartButton = document.getElementById("add-to-cart");
 const aside = document.querySelector("aside");
+const cancelButton = document.querySelector(".cancel");
+const showCart = document.getElementById("show-cart");
+const closeCart = document.getElementById("close-cart");
+const toggleInput = document.getElementById("theme-checkbox");
 
 let basePrice = 0;
 let currentQuantity = 1;
 let selectedSize = null;
 
 let pizzaFlavor = "";
-let pizzas = {};
-
-const SIZE_PRICE = {
-    P: -7.50,
-    M: 0,
-    G: 7.50
-};
-
-
+let pizzas = [];
 
 function toggleTheme() {
     const isDark = document.getElementById("theme-checkbox").checked;
@@ -63,13 +61,18 @@ function openModal() {
     selectedSize = null;
     addToCartButton.classList.add("disabled");
 }
+
 function selectedPizza(card) {
     const pizzaName = card.querySelector("h3").textContent;
     const ingredients = card.querySelector("p").textContent;
     const priceText = card.querySelector("h2").textContent;
 
     pizzaFlavor = pizzaName;
-    basePrice = parseFloat(priceText.replace("R$ ", "").replace(",", "."));
+
+    basePrice = parseFloat(
+        priceText.replace("R$ ", "").replace(",", ".")
+    );
+
     currentQuantity = 1;
 
     document.querySelector(".pizza-description h1").textContent = pizzaName;
@@ -86,16 +89,26 @@ function selectedPizza(card) {
 }
 
 function getPizzaPrice() {
+
+    const sizePrice = {
+        P: -7.50,
+        M: 0,
+        G: 7.50
+    };
+
     if (!selectedSize) return basePrice;
 
     const size = selectedSize[0];
-    return basePrice + SIZE_PRICE[size];
+
+    return basePrice + sizePrice[size];
 }
 
 function chooseSize(option) {
+
     if (!option) return;
 
-    sizeContainer.querySelectorAll("div")
+    sizeContainer
+        .querySelectorAll("div")
         .forEach(div => div.classList.remove("selected-size"));
 
     option.classList.add("selected-size");
@@ -114,23 +127,27 @@ function mountPizza() {
     const quantity = currentQuantity;
 
     const unitPrice = getPizzaPrice();
-    const price = unitPrice * quantity;
 
-    if (!pizzas[flavor]) {
-        pizzas[flavor] = {};
-    }
+    const existingPizza = pizzas.find(
+        pizza => pizza.flavor === flavor && pizza.size === size
+    );
 
-    if (!pizzas[flavor][size]) {
-        pizzas[flavor][size] = {
-            quantity: quantity,
-            price: price
-        };
+    if (existingPizza) {
+
+        existingPizza.increaseQuantity(quantity);
+
     } else {
-        pizzas[flavor][size].quantity += quantity;
-        pizzas[flavor][size].price += price;
-    }
 
-    console.log(pizzas);
+        pizzas.push(
+            new Pizza(
+                flavor,
+                size,
+                unitPrice,
+                quantity
+            )
+        );
+
+    }
 }
 
 function updatePrice() {
@@ -142,14 +159,6 @@ function updatePrice() {
         `R$ ${finalPrice.toFixed(2).replace(".", ",")}`;
 }
 
-function changeQuantity(action) {
-
-    if (action === "+") currentQuantity++;
-    if (action === "-" && currentQuantity > 1) currentQuantity--;
-
-    quantityDisplay.textContent = currentQuantity;
-    updatePrice();
-}
 function addToCart() {
 
     if (!selectedSize) {
@@ -168,47 +177,105 @@ function addToCart() {
         return;
     }
 
-    const counter = document
-        .querySelector("#count-pizzas p");
+    const counter =
+        document.querySelector("#count-pizzas p");
 
-    const pizzaCount = parseInt(counter.textContent);
+    const pizzaCount =
+        parseInt(counter.textContent);
 
-    counter.textContent = pizzaCount + currentQuantity;
+    counter.textContent =
+        pizzaCount + currentQuantity;
 
     mountPizza();
+
     showCartResume();
+
     closeModal();
 }
 
 function closeModal() {
+
     modal.style.display = "none";
+
     app.classList.remove("active");
 
-    sizeContainer.querySelectorAll("div")
+    sizeContainer
+        .querySelectorAll("div")
         .forEach(div => div.classList.remove("selected-size"));
 
     selectedSize = null;
+
     addToCartButton.classList.add("disabled");
 }
 
+function renderCart() {
+
+    const resumeContainer =
+        document.querySelector(".resume");
+
+    resumeContainer.innerHTML = "";
+
+    pizzas.forEach(pizza => {
+
+        const pizzaElement =
+            document.createElement("div");
+        pizzaElement.classList.add("pizza-resume");
+
+        pizzaElement.innerHTML = `
+            <div class="order-pizza">
+                <img src="assets/images/${pizza.flavor}.png" alt="pizza">
+                <h4>
+                    ${pizza.flavor}
+                    <span class="size">(${pizza.size})</span>
+                </h4>
+            </div>
+
+            <div class="quantity">
+                <button>
+                    <p>-</p>
+                </button>
+
+                <h4 class="pizza-quantity">
+                    ${pizza.quantity}
+                </h4>
+
+                <button>
+                    <p>+</p>
+                </button>
+            </div>
+        `;
+
+        resumeContainer.appendChild(pizzaElement);
+    });
+}
+
 function showCartResume() {
+
+    renderCart();
+
     aside.style.display = "flex";
+
     document.body.classList.add("cart-open");
 }
 
 function closeCartResume() {
+
     aside.style.display = "none";
+
     document.body.classList.remove("cart-open");
 }
 
 sizeContainer?.addEventListener("click", (event) => {
+
     const option = event.target.closest("div");
+
     chooseSize(option);
 });
 
 menu.addEventListener("click", (event) => {
 
     const purchase = event.target.closest(".purchase");
+
     if (!purchase) return;
 
     const card = purchase.closest(".pizza-card");
@@ -217,24 +284,40 @@ menu.addEventListener("click", (event) => {
 });
 
 document.addEventListener("click", (event) => {
+    const button =
+        event.target.closest(".quantity button");
 
-    const button = event.target.closest(".quantity button");
     if (!button) return;
 
-    const quantityContainer = button.closest(".quantity");
-    const display = quantityContainer.querySelector(".pizza-quantity");
+    const quantityContainer =
+        button.closest(".quantity");
+
+    const display =
+        quantityContainer.querySelector(".pizza-quantity");
 
     let value = parseInt(display.textContent);
 
     const action = button.textContent.trim();
 
     if (action === "+") value++;
+
     if (action === "-" && value > 1) value--;
 
     display.textContent = value;
 
     if (modal.contains(button)) {
         currentQuantity = value;
+
         updatePrice();
     }
 });
+
+toggleInput.addEventListener("change", toggleTheme);
+
+cancelButton?.addEventListener("click", closeModal);
+
+addToCartButton?.addEventListener("click", addToCart);
+
+closeCart?.addEventListener("click", closeCartResume);
+
+showCart?.addEventListener("click", showCartResume);

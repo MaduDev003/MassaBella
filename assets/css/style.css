@@ -630,7 +630,7 @@ body.cart-open .container {
     margin-top: 5px;
 }
 
-.pizza-resume, .pizza {
+.pizza-resume, .order-pizza {
     display: flex;
     align-items: center;
     gap: 15px;
@@ -658,7 +658,7 @@ body.cart-open .container {
 }
 
 
-.pizza img {
+.order-pizza img {
     width: 40px;
 }
 

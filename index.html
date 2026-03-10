@@ -21,10 +21,10 @@
                 <div id="count-pizzas" class="count-pizzas">
                     <p>0</p>
                 </div>
-                <img onclick="showCartResume()" class="cart-icon" src="assets/images/icons/cart.svg" alt="Carrinho"
+                <img id="show-cart" class="cart-icon" src="assets/images/icons/cart.svg" alt="Carrinho"
                     onload="SVGInject(this)" />
                 <div class="theme-switch">
-                    <input onchange="toggleTheme()" type="checkbox" id="theme-checkbox" />
+                    <input type="checkbox" id="theme-checkbox" />
                     <label for="theme-checkbox" class="switch">
                         <img src="assets/images/icons/sun.svg" class="icon sun" alt="Sol" onload="SVGInject(this)">
                         <img src="assets/images/icons/moon.svg" class="icon moon" alt="Lua" onload="SVGInject(this)">
@@ -132,99 +132,9 @@
         <aside>
             <div class="aside-header">
                 <h2 class="cart-info">Suas Pizzas</h2>
-                <h4 onclick="closeCartResume()">X</h4>
+                <h4 id="close-cart">X</h4>
             </div>
             <div class="resume">
-                <div class="pizza-resume">
-                    <div class="pizza">
-                        <img src="assets/images/margherita.png" alt="pizza">
-                        <h4>Margherita <span class="size">(P)</span></h4>
-                    </div>
-                    <div class="quantity">
-                        <button>
-                            <p>-</p>
-                        </button>
-                        <h4 class="pizza-quantity">1</h4>
-                        <button>
-                            <p>+</p>
-                        </button>
-                    </div>
-                </div>
-                 <div class="pizza-resume">
-                    <div class="pizza">
-                        <img src="assets/images/margherita.png" alt="pizza">
-                        <h4>Margherita <span class="size">(P)</span></h4>
-                    </div>
-                    <div class="quantity">
-                        <button>
-                            <p>-</p>
-                        </button>
-                        <h4 class="pizza-quantity">1</h4>
-                        <button>
-                            <p>+</p>
-                        </button>
-                    </div>
-                </div>
-                 <div class="pizza-resume">
-                    <div class="pizza">
-                        <img src="assets/images/margherita.png" alt="pizza">
-                        <h4>Margherita <span class="size">(M)</span></h4>
-                    </div>
-                    <div class="quantity">
-                        <button>
-                            <p>-</p>
-                        </button>
-                        <h4 class="pizza-quantity">1</h4>
-                        <button>
-                            <p>+</p>
-                        </button>
-                    </div>
-                </div>
-                 <div class="pizza-resume">
-                    <div class="pizza">
-                        <img src="assets/images/margherita.png" alt="pizza">
-                        <h4>Margherita <span class="size">(P)</span></h4>
-                    </div>
-                    <div class="quantity">
-                        <button>
-                            <p>-</p>
-                        </button>
-                        <h4 class="pizza-quantity">1</h4>
-                        <button>
-                            <p>+</p>
-                        </button>
-                    </div>
-                </div>
-               <div class="pizza-resume">
-                    <div class="pizza">
-                        <img src="assets/images/margherita.png" alt="pizza">
-                        <h4>Margherita <span class="size">(P)</span></h4>
-                    </div>
-                    <div class="quantity">
-                        <button>
-                            <p>-</p>
-                        </button>
-                        <h4 class="pizza-quantity">1</h4>
-                        <button>
-                            <p>+</p>
-                        </button>
-                    </div>
-                </div>
-                <div class="pizza-resume">
-                    <div class="pizza">
-                        <img src="assets/images/margherita.png" alt="pizza">
-                        <h4>Margherita <span class="size">(P)</span></h4>
-                    </div>
-                    <div class="quantity">
-                        <button>
-                            <p>-</p>
-                        </button>
-                        <h4 class="pizza-quantity">1</h4>
-                        <button>
-                            <p>+</p>
-                        </button>
-                    </div>
-                </div>
             </div>
             <div class="resume-info">
                 <hr>
@@ -251,7 +161,7 @@
 
 
             <div id="final">
-                <button id="purchase" class="confirm" onclick="addToCart()">
+                <button id="purchase" class="confirm">
                     <p>Finalizar Compra</p>
                 </button>
             </div>
@@ -302,10 +212,10 @@
                 </div>
             </div>
             <div class="modal-action">
-                <button id="add-to-cart" class="confirm disabled" onclick="addToCart()">
+                <button id="add-to-cart" class="confirm disabled">
                     <p>Adicionar Ao Carrinho</p>
                 </button>
-                <button class="cancel" onclick="closeModal()">
+                <button class="cancel">
                     <p>Cancelar</p>
                 </button>
             </div>
@@ -313,7 +223,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="scripts/index.js"></script>
+    <script type="module" src="scripts/index.js"></script>
 </body>
 
 </html>

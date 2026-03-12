@@ -96,6 +96,8 @@ function getPizzaPrice() {
         G: 7.50
     };
 
+
+
     if (!selectedSize) return basePrice;
 
     const size = selectedSize[0];
@@ -133,9 +135,7 @@ function mountPizza() {
     );
 
     if (existingPizza) {
-
         existingPizza.increaseQuantity(quantity);
-
     } else {
 
         pizzas.push(
@@ -184,7 +184,7 @@ function addToCart() {
         parseInt(counter.textContent);
 
     counter.textContent =
-        pizzaCount + currentQuantity;
+        pizzaCount + currentQuantity; /* TODO: corrigir para ser a soma de pizzas dentro do carrinho */
 
     mountPizza();
 
@@ -214,8 +214,8 @@ function renderCart() {
         document.querySelector(".resume");
 
     resumeContainer.innerHTML = "";
-
-    pizzas.forEach(pizza => {
+    /* TODO: aqui  */
+    pizzas.forEach((pizza, index) => {
 
         const pizzaElement =
             document.createElement("div");
@@ -226,11 +226,11 @@ function renderCart() {
                 <img src="assets/images/${pizza.flavor}.png" alt="pizza">
                 <h4>
                     ${pizza.flavor}
-                    <span class="size">(${pizza.size})</span>
+                    <span class="size">(${pizza.size})</span> 
                 </h4>
             </div>
 
-            <div class="quantity">
+            <div class="quantity" data-index="${index}">
                 <button>
                     <p>-</p>
                 </button>
@@ -250,7 +250,6 @@ function renderCart() {
 }
 
 function showCartResume() {
-
     renderCart();
 
     aside.style.display = "flex";
@@ -301,7 +300,31 @@ document.addEventListener("click", (event) => {
 
     if (action === "+") value++;
 
-    if (action === "-" && value > 1) value--;
+    if (modal.contains(button)) {
+        if (action === "-" && value > 1) value--;
+    } else {
+        if (action === "-" && value > 0) value--;
+        if (value === 0) {
+
+            const index = quantityContainer.dataset.index;
+            const pizza = pizzas[index];
+
+            pizza.delete().then(result => {
+                if (result.isConfirmed) {
+                    pizzas.splice(index, 1);
+                    renderCart();
+
+                } else {
+                    value = 1;
+                    display.textContent = value;
+
+                }
+
+            });
+
+            return;
+        }
+    }
 
     display.textContent = value;
 

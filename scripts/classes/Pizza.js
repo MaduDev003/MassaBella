@@ -6,24 +6,19 @@ class Pizza {
     this.quantity = quantity;
   }
 
-  getPizzaPrice() {
-   return {
-        P: -7.50,
-        M: 0,
-        G: 7.50
-    };
-  }
-
   getTotal() {
     return this.price * this.quantity;
   }
-  
 
-  increaseQuantity(plusQuantity) {
+  updateQuantity(value) {
+    this.quantity = value;
+  }
+
+  sumQuantity(plusQuantity) {
     this.quantity += plusQuantity;
   }
 
-  delete() {
+  confirmDelete() {
     return Swal.fire({
       icon: "warning",
       title: "Remover pizza?",
@@ -37,7 +32,7 @@ class Pizza {
 
 
   decreaseQuantity() {
-    if (this.quantity > 1) {
+    if (this.quantity > 0) {
       this.quantity--;
     }
   }

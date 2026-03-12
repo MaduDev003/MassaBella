@@ -1,65 +1,40 @@
 import Pizza from "./classes/Pizza.js";
 
+import { toggleTheme } from "./utils/toggleTheme.js";
+import { openModal, closeModal } from "./services/modal.js";
+import { closeCartResume, renderCart, addPizzaToCart, showCartResume } from "./services/cart.js";
+import { cartStore } from "./store/cartStore.js";
+
 const sizeContainer = document.querySelector(".size-options");
 const modal = document.getElementById("modal");
-const app = document.getElementById("app");
 const menu = document.querySelector(".menu");
 const quantityDisplay = modal.querySelector(".pizza-quantity");
 const priceElement = document.querySelector(".choosed-price h1");
 const addToCartButton = document.getElementById("add-to-cart");
-const aside = document.querySelector("aside");
 const cancelButton = document.querySelector(".cancel");
 const showCart = document.getElementById("show-cart");
 const closeCart = document.getElementById("close-cart");
 const toggleInput = document.getElementById("theme-checkbox");
 
 let basePrice = 0;
-let currentQuantity = 1;
-let selectedSize = null;
-
 let pizzaFlavor = "";
-let pizzas = [];
 
-function toggleTheme() {
-    const isDark = document.getElementById("theme-checkbox").checked;
+function checkSizeSelection() {
+    if (!cartStore.selectedSize) {
+        const isDark = document.body.classList.contains("dark");
 
-    const toggleClass = el => {
-        if (!el) return;
-        el.classList.toggle("dark", isDark);
-        el.classList.toggle("light", !isDark);
-    };
+        Swal.fire({
+            icon: "warning",
+            title: "Oops...",
+            text: "Por favor, selecione um tamanho para a pizza.",
+            background: isDark ? "#2b2b2b" : "#ffffff",
+            color: isDark ? "#ffffff" : "#1f1f1f",
+            confirmButtonColor: "#22c55e"
+        });
 
-    const selectors = [
-        "body",
-        ".cancel p",
-        "#modal",
-        ".cart-icon",
-        ".pizza-description p",
-        ".choosed-price h1",
-        "aside",
-        ".resume-info hr",
-        ".info h3",
-        ".pizza-info",
-        ".size-options div",
-        ".size-options div h3",
-        ".size-options div p",
-        ".quantity button",
-        ".quantity button p",
-        ".pizza-quantity",
-        ".quantity"
-    ];
-
-    selectors.forEach(selector => {
-        document.querySelectorAll(selector).forEach(toggleClass);
-    });
-}
-
-function openModal() {
-    modal.style.display = "flex";
-    app.classList.add("active");
-
-    selectedSize = null;
-    addToCartButton.classList.add("disabled");
+        return false;
+    }
+    return true;
 }
 
 function selectedPizza(card) {
@@ -73,7 +48,7 @@ function selectedPizza(card) {
         priceText.replace("R$ ", "").replace(",", ".")
     );
 
-    currentQuantity = 1;
+    cartStore.currentQuantity = 1;
 
     document.querySelector(".pizza-description h1").textContent = pizzaName;
     document.querySelector(".pizza-description p").textContent = ingredients;
@@ -82,31 +57,23 @@ function selectedPizza(card) {
     img.src = `assets/images/${pizzaName.toLowerCase()}.png`;
     img.alt = pizzaName;
 
-    quantityDisplay.textContent = currentQuantity;
+    quantityDisplay.textContent = cartStore.currentQuantity;
 
     updatePrice();
     openModal();
 }
 
 function getPizzaPrice() {
+    const sizePrice = cartStore.pizzaSizesPrices;
 
-    const sizePrice = {
-        P: -7.50,
-        M: 0,
-        G: 7.50
-    };
+    if (!cartStore.selectedSize) return basePrice;
 
-
-
-    if (!selectedSize) return basePrice;
-
-    const size = selectedSize[0];
+    const size = cartStore.selectedSize[0];
 
     return basePrice + sizePrice[size];
 }
 
 function chooseSize(option) {
-
     if (!option) return;
 
     sizeContainer
@@ -115,30 +82,27 @@ function chooseSize(option) {
 
     option.classList.add("selected-size");
 
-    selectedSize = option.querySelector("h3").textContent;
+    cartStore.selectedSize = option.querySelector("h3").textContent;
 
     updatePrice();
 
     addToCartButton.classList.remove("disabled");
 }
 
-function mountPizza() {
-
+function showPizzaAtCart() {
     const flavor = pizzaFlavor.toLowerCase();
-    const size = selectedSize[0];
-    const quantity = currentQuantity;
-
+    const size = cartStore.selectedSize[0];
+    const quantity = cartStore.currentQuantity;
     const unitPrice = getPizzaPrice();
 
-    const existingPizza = pizzas.find(
+    const existingPizza = cartStore.pizzas.find(
         pizza => pizza.flavor === flavor && pizza.size === size
     );
 
     if (existingPizza) {
-        existingPizza.increaseQuantity(quantity);
+        existingPizza.sumQuantity(quantity);
     } else {
-
-        pizzas.push(
+        cartStore.pizzas.push(
             new Pizza(
                 flavor,
                 size,
@@ -146,122 +110,41 @@ function mountPizza() {
                 quantity
             )
         );
-
     }
 }
 
 function updatePrice() {
-
     const unitPrice = getPizzaPrice();
-    const finalPrice = unitPrice * currentQuantity;
+    const finalPrice = unitPrice * cartStore.currentQuantity;
 
     priceElement.textContent =
         `R$ ${finalPrice.toFixed(2).replace(".", ",")}`;
 }
 
-function addToCart() {
+function deletePizza(quantityContainer) {
+    const index = quantityContainer.dataset.index;
+    const pizza = cartStore.pizzas[index];
 
-    if (!selectedSize) {
-
-        const isDark = document.body.classList.contains("dark");
-
-        Swal.fire({
-            icon: "warning",
-            title: "Oops...",
-            text: "Por favor, selecione um tamanho para a pizza.",
-            background: isDark ? "#2b2b2b" : "#ffffff",
-            color: isDark ? "#ffffff" : "#1f1f1f",
-            confirmButtonColor: "#22c55e"
-        });
-
-        return;
-    }
-
-    const counter =
-        document.querySelector("#count-pizzas p");
-
-    const pizzaCount =
-        parseInt(counter.textContent);
-
-    counter.textContent =
-        pizzaCount + currentQuantity; /* TODO: corrigir para ser a soma de pizzas dentro do carrinho */
-
-    mountPizza();
-
-    showCartResume();
-
-    closeModal();
-}
-
-function closeModal() {
-
-    modal.style.display = "none";
-
-    app.classList.remove("active");
-
-    sizeContainer
-        .querySelectorAll("div")
-        .forEach(div => div.classList.remove("selected-size"));
-
-    selectedSize = null;
-
-    addToCartButton.classList.add("disabled");
-}
-
-function renderCart() {
-
-    const resumeContainer =
-        document.querySelector(".resume");
-
-    resumeContainer.innerHTML = "";
-    /* TODO: aqui  */
-    pizzas.forEach((pizza, index) => {
-
-        const pizzaElement =
-            document.createElement("div");
-        pizzaElement.classList.add("pizza-resume");
-
-        pizzaElement.innerHTML = `
-            <div class="order-pizza">
-                <img src="assets/images/${pizza.flavor}.png" alt="pizza">
-                <h4>
-                    ${pizza.flavor}
-                    <span class="size">(${pizza.size})</span> 
-                </h4>
-            </div>
-
-            <div class="quantity" data-index="${index}">
-                <button>
-                    <p>-</p>
-                </button>
-
-                <h4 class="pizza-quantity">
-                    ${pizza.quantity}
-                </h4>
-
-                <button>
-                    <p>+</p>
-                </button>
-            </div>
-        `;
-
-        resumeContainer.appendChild(pizzaElement);
+    pizza.confirmDelete().then(result => {
+        if (result.isConfirmed) {
+            cartStore.pizzas.splice(index, 1);
+            renderCart(cartStore.pizzas);
+        }
     });
 }
 
-function showCartResume() {
-    renderCart();
+function mountCartResume() {
+    const valid = checkSizeSelection();
+    if (!valid) return;
 
-    aside.style.display = "flex";
+    const added = addPizzaToCart(
+        cartStore.currentQuantity
+    );
+    if (!added) return;
 
-    document.body.classList.add("cart-open");
-}
-
-function closeCartResume() {
-
-    aside.style.display = "none";
-
-    document.body.classList.remove("cart-open");
+    showPizzaAtCart();
+    showCartResume(cartStore.pizzas);
+    closeModal();
 }
 
 sizeContainer?.addEventListener("click", (event) => {
@@ -269,78 +152,67 @@ sizeContainer?.addEventListener("click", (event) => {
     const option = event.target.closest("div");
 
     chooseSize(option);
+
 });
 
 menu.addEventListener("click", (event) => {
-
     const purchase = event.target.closest(".purchase");
-
     if (!purchase) return;
 
     const card = purchase.closest(".pizza-card");
-
     selectedPizza(card);
+
 });
 
 document.addEventListener("click", (event) => {
-    const button =
-        event.target.closest(".quantity button");
-
+    const button = event.target.closest(".quantity button");
     if (!button) return;
 
-    const quantityContainer =
-        button.closest(".quantity");
-
-    const display =
-        quantityContainer.querySelector(".pizza-quantity");
-
-    let value = parseInt(display.textContent);
-
+    const quantityContainer = button.closest(".quantity");
+    const display = quantityContainer.querySelector(".pizza-quantity");
     const action = button.textContent.trim();
 
-    if (action === "+") value++;
-
     if (modal.contains(button)) {
-        if (action === "-" && value > 1) value--;
-    } else {
-        if (action === "-" && value > 0) value--;
-        if (value === 0) {
-
-            const index = quantityContainer.dataset.index;
-            const pizza = pizzas[index];
-
-            pizza.delete().then(result => {
-                if (result.isConfirmed) {
-                    pizzas.splice(index, 1);
-                    renderCart();
-
-                } else {
-                    value = 1;
-                    display.textContent = value;
-
-                }
-
-            });
-
-            return;
+        if (action === "+") {
+            cartStore.currentQuantity++;
         }
-    }
 
-    display.textContent = value;
+        if (action === "-" && cartStore.currentQuantity > 1) {
+            cartStore.currentQuantity--;
+        }
 
-    if (modal.contains(button)) {
-        currentQuantity = value;
+        display.textContent = cartStore.currentQuantity;
 
         updatePrice();
+
+        return;
     }
+
+    
+    const index = quantityContainer.dataset.index;
+    const pizza = cartStore.pizzas[index];
+
+    if (action === "+") {
+        pizza.sumQuantity(1);
+    }
+
+    if (action === "-") {
+        pizza.decreaseQuantity();
+    }
+
+    if (pizza.quantity === 0) {
+        deletePizza(quantityContainer);
+        return;
+    }
+
+    display.textContent = pizza.quantity;
+
+    renderCart(cartStore.pizzas);
+
 });
 
 toggleInput.addEventListener("change", toggleTheme);
-
 cancelButton?.addEventListener("click", closeModal);
-
-addToCartButton?.addEventListener("click", addToCart);
-
+addToCartButton?.addEventListener("click", mountCartResume);
 closeCart?.addEventListener("click", closeCartResume);
-
-showCart?.addEventListener("click", showCartResume);
+showCart?.addEventListener("click", () => showCartResume(cartStore.pizzas));

@@ -41,26 +41,21 @@ function showCartResume(pizzas) {
 
 }
 
-function addPizzaToCart( currentQuantity) {
+function updatePizzaCounter(currentQuantity) {
     const counter = document.querySelector("#count-pizzas p");
     const pizzaCount = parseInt(counter.textContent);
-    //TODO: modificar aqui para atualizar
     counter.textContent = pizzaCount + currentQuantity;
-
-
-    return true;
-
+    return;
 }
 
 function closeCartResume() {
     aside.style.display = "none";
     document.body.classList.remove("cart-open");
-
 }
 
 export {
     closeCartResume,
     renderCart,
-    addPizzaToCart,
+    updatePizzaCounter,
     showCartResume
 };

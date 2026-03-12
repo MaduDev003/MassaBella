@@ -2,7 +2,7 @@ import Pizza from "./classes/Pizza.js";
 
 import { toggleTheme } from "./utils/toggleTheme.js";
 import { openModal, closeModal } from "./services/modal.js";
-import { closeCartResume, renderCart, addPizzaToCart, showCartResume } from "./services/cart.js";
+import { closeCartResume, renderCart, updatePizzaCounter, showCartResume } from "./services/cart.js";
 import { cartStore } from "./store/cartStore.js";
 
 const sizeContainer = document.querySelector(".size-options");
@@ -137,11 +137,7 @@ function mountCartResume() {
     const valid = checkSizeSelection();
     if (!valid) return;
 
-    const added = addPizzaToCart(
-        cartStore.currentQuantity
-    );
-    if (!added) return;
-
+    updatePizzaCounter(cartStore.currentQuantity);
     showPizzaAtCart();
     showCartResume(cartStore.pizzas);
     closeModal();
@@ -194,10 +190,12 @@ document.addEventListener("click", (event) => {
 
     if (action === "+") {
         pizza.sumQuantity(1);
+        updatePizzaCounter(1);
     }
 
     if (action === "-") {
         pizza.decreaseQuantity();
+        updatePizzaCounter(-1);
     }
 
     if (pizza.quantity === 0) {
@@ -205,8 +203,7 @@ document.addEventListener("click", (event) => {
         return;
     }
 
-    display.textContent = pizza.quantity;
-
+   
     renderCart(cartStore.pizzas);
 
 });

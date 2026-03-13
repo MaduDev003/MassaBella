@@ -1,5 +1,4 @@
 const aside = document.querySelector("aside");
-
 function renderCart(pizzas) {
     const resumeContainer = document.querySelector(".resume");
     resumeContainer.innerHTML = "";
@@ -41,21 +40,15 @@ function showCartResume(pizzas) {
 
 }
 
-function updatePizzaCounter(currentQuantity) {
-    const counter = document.querySelector("#count-pizzas p");
-    const pizzaCount = parseInt(counter.textContent);
-    counter.textContent = pizzaCount + currentQuantity;
-    return;
-}
-
 function closeCartResume() {
     aside.style.display = "none";
     document.body.classList.remove("cart-open");
 }
 
+
+
 export {
     closeCartResume,
     renderCart,
-    updatePizzaCounter,
     showCartResume
 };

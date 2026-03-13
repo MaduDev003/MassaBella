@@ -30,11 +30,12 @@ class Pizza {
     });
   }
 
-
   decreaseQuantity() {
-    if (this.quantity > 0) {
-      this.quantity--;
+    if (this.quantity === 1) {
+      return this.confirmDelete();
     }
+
+    this.quantity--;
   }
 }
 

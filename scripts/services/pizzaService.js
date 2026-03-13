@@ -1,6 +1,6 @@
 import Pizza from "../classes/Pizza.js";
 import { cartStore } from "../store/cartStore.js";
-import { renderCart } from "./cartService.js";
+import { renderOrderCart } from "./cartService.js";
 import { openModal } from "./modalService.js";
 const quantityDisplay = modal.querySelector(".pizza-quantity");
 const priceElement = document.querySelector(".choosed-price h1");
@@ -126,7 +126,7 @@ function handlePizzaAtCartQuantity(action, index) {
     if (action === "+") {
         pizza.sumQuantity(1);
         updatePizzaCounter(1);
-        renderCart(cartStore.pizzas);
+        renderOrderCart(cartStore.pizzas);
         return;
     }
 
@@ -139,13 +139,13 @@ function handlePizzaAtCartQuantity(action, index) {
                     cartStore.pizzas.splice(index, 1);
                     updatePizzaCounter(-1);
                 }
-                renderCart(cartStore.pizzas);
+                renderOrderCart(cartStore.pizzas);
             });
             return;
         }
 
         updatePizzaCounter(-1);
-        renderCart(cartStore.pizzas);
+        renderOrderCart(cartStore.pizzas);
     }
 }
 

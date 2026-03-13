@@ -529,6 +529,19 @@ button.confirm {
     cursor: not-allowed;
 }
 
+#add-to-cart p.dark {
+    color: var(--light-background)
+}
+
+body.dark .pizza-resume .quantity {
+    background: var(--legend-light);
+}
+
+body.dark .pizza-resume .quantity button p {
+    color: var(--light-background);
+}
+
+
 #modal.dark {
     background-color: #2c2c2c;
 }

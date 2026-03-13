@@ -1,6 +1,6 @@
 import { toggleTheme } from "./utils/toggleTheme.js";
 import { closeModal, handleModalQuantity } from "./services/modalService.js";
-import { closeCartResume, renderCart, showCartResume } from "./services/cartService.js";
+import { closeCartResume, showCartResume } from "./services/cartService.js";
 import { handlePizzaAtCartQuantity, updatePizzaCounter,checkSizeSelection, selectedPizza, chooseSize, showPizzaAtCart } from "./services/pizzaService.js";
 import { cartStore } from "./store/cartStore.js";
 
@@ -14,7 +14,7 @@ const closeCart = document.getElementById("close-cart");
 const toggleInput = document.getElementById("theme-checkbox");
 
 
-function mountCartResume() {
+function addOrder() {
     const valid = checkSizeSelection();
     if (!valid) return;
 
@@ -58,6 +58,6 @@ document.addEventListener("click", (event) => {
 
 toggleInput.addEventListener("change", toggleTheme);
 cancelButton?.addEventListener("click", closeModal);
-addToCartButton?.addEventListener("click", mountCartResume);
+addToCartButton?.addEventListener("click", addOrder);
 closeCart?.addEventListener("click", closeCartResume);
 showCart?.addEventListener("click", () => showCartResume(cartStore.pizzas));

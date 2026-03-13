@@ -1,5 +1,6 @@
 const aside = document.querySelector("aside");
-function renderCart(pizzas) {
+
+function renderOrderCart(pizzas) {
     const resumeContainer = document.querySelector(".resume");
     resumeContainer.innerHTML = "";
 
@@ -33,7 +34,7 @@ function renderCart(pizzas) {
 }
 
 function showCartResume(pizzas) {
-    renderCart(pizzas);
+    renderOrderCart(pizzas);
 
     aside.style.display = "flex";
     document.body.classList.add("cart-open");
@@ -49,6 +50,6 @@ function closeCartResume() {
 
 export {
     closeCartResume,
-    renderCart,
+    renderOrderCart,
     showCartResume
 };

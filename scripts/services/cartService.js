@@ -49,18 +49,28 @@ function closeCartResume() {
 }
 
 function disccount(subtotal) {
-    const disccountElement = document.getElementById("disccount");
+    const disscount = document.getElementById("disccount");
 
     if (typeof subtotal !== "number") {
         console.warn("subtotal inválido:", subtotal);
-        disccountElement.textContent = "R$ 0,00";
+        disscount.textContent = "R$ 0,00";
         return;
     }
 
     const value = subtotal * 0.1;
 
-    disccountElement.textContent =
+    disscount.textContent =
         `R$ ${value.toFixed(2).replace(".", ",")}`;
+
+    return value;
+}
+
+function totalPrice(calcSubtotal, totalDisccount = 0) {
+    const total = document.getElementById("total-price");
+    const totalPrice = calcSubtotal - totalDisccount;
+
+    total.textContent = `R$ ${totalPrice.toFixed(2).replace(".", ",")}`;
+
 }
 
 function subtotal(){
@@ -69,6 +79,7 @@ function subtotal(){
     if (!cartStore.pizzas || cartStore.pizzas.length === 0) {
         subtotalElement.textContent = `R$ 0,00`;
         disccount(0);
+        totalPrice(0);
         return;
     } 
     
@@ -76,7 +87,8 @@ function subtotal(){
         return acc + pizza.getTotal();
     }, 0);
     
-    disccount(calcSubtotal);
+    const totalDisccount = disccount(calcSubtotal);
+    totalPrice(calcSubtotal, totalDisccount);
     subtotalElement.textContent = `R$ ${calcSubtotal.toFixed(2).replace(".", ",")}`;
 
 }

@@ -1,6 +1,6 @@
 import { toggleTheme } from "./utils/toggleTheme.js";
 import { closeModal, handleModalQuantity } from "./services/modalService.js";
-import { closeCartResume, showCartResume } from "./services/cartService.js";
+import { closeCartResume, showCartResume, subtotal } from "./services/cartService.js";
 import { handlePizzaAtCartQuantity, updatePizzaCounter,checkSizeSelection, selectedPizza, chooseSize, showPizzaAtCart } from "./services/pizzaService.js";
 import { cartStore } from "./store/cartStore.js";
 
@@ -21,6 +21,7 @@ function addOrder() {
     updatePizzaCounter(cartStore.currentQuantity);
     showPizzaAtCart();
     showCartResume(cartStore.pizzas);
+    subtotal();
     closeModal();
 }
 
@@ -50,9 +51,11 @@ document.addEventListener("click", (event) => {
 
     if (modal.contains(button)) {
         handleModalQuantity(action, display);
+         subtotal();
     } else {
         const index = Number(quantityContainer.dataset.index);
         handlePizzaAtCartQuantity(action, index);
+        subtotal();
     }
 });
 

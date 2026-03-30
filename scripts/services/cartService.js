@@ -1,3 +1,5 @@
+import { cartStore } from "../store/cartStore.js";
+
 const aside = document.querySelector("aside");
 
 function renderOrderCart(pizzas) {
@@ -48,8 +50,25 @@ function closeCartResume() {
 
 
 
+function subtotal(){
+    const subtotalElement = document.getElementById("subtotal");
+
+    if (!cartStore.pizzas || cartStore.pizzas.length === 0) {
+        subtotalElement.textContent = `R$ 0,00`;
+        return;
+    }
+
+    const total = cartStore.pizzas.reduce((acc, pizza) => {
+        return acc + pizza.getTotal();
+    }, 0);
+
+    subtotalElement.textContent = `R$ ${total.toFixed(2).replace(".", ",")}`;
+}
+
+
 export {
     closeCartResume,
     renderOrderCart,
-    showCartResume
+    showCartResume,
+    subtotal
 };

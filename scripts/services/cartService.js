@@ -78,7 +78,7 @@ function subtotal(){
 
     if (!cartStore.pizzas || cartStore.pizzas.length === 0) {
         subtotalElement.textContent = `R$ 0,00`;
-        disccount(0);
+        disccount();
         totalPrice(0);
         return;
     } 

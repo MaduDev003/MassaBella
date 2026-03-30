@@ -139,6 +139,7 @@ function handlePizzaAtCartQuantity(action, index) {
                     cartStore.pizzas.splice(index, 1);
                     updatePizzaCounter(-1);
                     subtotal();
+                    
                 }
                 renderOrderCart(cartStore.pizzas);
             });

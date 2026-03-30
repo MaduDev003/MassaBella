@@ -48,21 +48,37 @@ function closeCartResume() {
     document.body.classList.remove("cart-open");
 }
 
+function disccount(subtotal) {
+    const disccountElement = document.getElementById("disccount");
 
+    if (typeof subtotal !== "number") {
+        console.warn("subtotal inválido:", subtotal);
+        disccountElement.textContent = "R$ 0,00";
+        return;
+    }
+
+    const value = subtotal * 0.1;
+
+    disccountElement.textContent =
+        `R$ ${value.toFixed(2).replace(".", ",")}`;
+}
 
 function subtotal(){
     const subtotalElement = document.getElementById("subtotal");
 
     if (!cartStore.pizzas || cartStore.pizzas.length === 0) {
         subtotalElement.textContent = `R$ 0,00`;
+        disccount(0);
         return;
-    }
-
-    const total = cartStore.pizzas.reduce((acc, pizza) => {
+    } 
+    
+    const calcSubtotal = cartStore.pizzas.reduce((acc, pizza) => {
         return acc + pizza.getTotal();
     }, 0);
+    
+    disccount(calcSubtotal);
+    subtotalElement.textContent = `R$ ${calcSubtotal.toFixed(2).replace(".", ",")}`;
 
-    subtotalElement.textContent = `R$ ${total.toFixed(2).replace(".", ",")}`;
 }
 
 
@@ -70,5 +86,6 @@ export {
     closeCartResume,
     renderOrderCart,
     showCartResume,
-    subtotal
+    subtotal,
+    disccount
 };

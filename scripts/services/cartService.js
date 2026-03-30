@@ -94,10 +94,80 @@ function subtotal(){
 }
 
 
+function renderCartContent() {
+    aside.innerHTML = `
+        <div class="aside-header">
+            <h2 class="cart-info">Suas Pizzas</h2>
+            <h4 id="close-cart">X</h4>
+        </div>
+
+        <div class="resume"></div>
+
+        <div class="resume-info">
+            <hr>
+            <div class="info">
+                <h3>Subtotal</h3>
+                <h3 id="subtotal">R$ 0,00</h3>
+            </div>
+        </div>
+
+        <div class="resume-info">
+            <hr>
+            <div class="info">
+                <h3>Desconto
+                    <span id="disccount-percent">(10%)</span>
+                </h3>
+                <h3 id="disccount">R$ 0,00</h3>
+            </div>
+            <hr>
+        </div>
+
+        <div id="total">
+            <h2>Total</h2>
+            <h2 id="total-price">R$ 0,00</h2>
+        </div>
+
+        <div id="final">
+            <button id="purchase" class="confirm">
+                <p>Finalizar Compra</p>
+            </button>
+        </div>
+    `;
+
+   
+}
+
+function renderEmptyCart() {
+    aside.innerHTML = `
+        <div class="aside-header">
+            <h2 class="cart-info">Seu carrinho</h2>
+            <h4 id="close-cart">X</h4>
+        </div>
+
+        <div class="empty-cart">
+            <p>Seu carrinho está vazio 🥺</p>
+        </div>
+    `;
+}
+
+function updateCartUI() {
+    if (!cartStore.pizzas || cartStore.pizzas.length === 0) {
+        renderEmptyCart();
+    } else {
+        renderCartContent();
+        renderOrderCart(cartStore.pizzas);
+        subtotal();
+    }
+
+    aside.style.display = "flex";
+    document.body.classList.add("cart-open");
+}
+
 export {
     closeCartResume,
     renderOrderCart,
     showCartResume,
     subtotal,
-    disccount
+    disccount,
+    updateCartUI
 };

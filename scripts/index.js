@@ -1,6 +1,6 @@
 import { toggleTheme } from "./utils/toggleTheme.js";
 import { closeModal, handleModalQuantity } from "./services/modalService.js";
-import { closeCartResume, showCartResume, subtotal } from "./services/cartService.js";
+import { closeCartResume, showCartResume, subtotal, updateCartUI } from "./services/cartService.js";
 import { handlePizzaAtCartQuantity, updatePizzaCounter,checkSizeSelection, selectedPizza, chooseSize, showPizzaAtCart } from "./services/pizzaService.js";
 import { cartStore } from "./store/cartStore.js";
 
@@ -20,8 +20,7 @@ function addOrder() {
 
     updatePizzaCounter(cartStore.currentQuantity);
     showPizzaAtCart();
-    showCartResume(cartStore.pizzas);
-    subtotal();
+    updateCartUI();
     closeModal();
 }
 
@@ -62,5 +61,11 @@ document.addEventListener("click", (event) => {
 toggleInput.addEventListener("change", toggleTheme);
 cancelButton?.addEventListener("click", closeModal);
 addToCartButton?.addEventListener("click", addOrder);
-closeCart?.addEventListener("click", closeCartResume);
-showCart?.addEventListener("click", () => showCartResume(cartStore.pizzas));
+document.addEventListener("click", (event) => {
+    if (event.target.id === "close-cart") {
+        closeCartResume();
+    }
+});
+showCart?.addEventListener("click", () => {
+    updateCartUI();
+});

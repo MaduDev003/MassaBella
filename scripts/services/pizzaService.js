@@ -1,6 +1,6 @@
 import Pizza from "../classes/Pizza.js";
 import { cartStore } from "../store/cartStore.js";
-import { renderOrderCart, subtotal } from "./cartService.js";
+import { renderOrderCart, updateCartUI } from "./cartService.js";
 import { openModal } from "./modalService.js";
 const quantityDisplay = modal.querySelector(".pizza-quantity");
 const priceElement = document.querySelector(".choosed-price h1");
@@ -138,7 +138,8 @@ function handlePizzaAtCartQuantity(action, index) {
                 if (isConfirmed) {
                     cartStore.pizzas.splice(index, 1);
                     updatePizzaCounter(-1);
-                    subtotal();
+                    updateCartUI();
+                    return;
                     
                 }
                 renderOrderCart(cartStore.pizzas);

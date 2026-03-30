@@ -732,3 +732,19 @@ hr:nth-child(3){
 .info h3.dark {
     color: #616161 ;
 }
+
+.empty-cart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+}
+
+.empty-cart p {
+    font-size: 16px;
+}
+
+.empty-cart img {
+    width: 250px;
+}

@@ -73,7 +73,7 @@ function totalPrice(calcSubtotal, totalDisccount = 0) {
 
 }
 
-function subtotal(){
+function subtotal() {
     const subtotalElement = document.getElementById("subtotal");
 
     if (!cartStore.pizzas || cartStore.pizzas.length === 0) {
@@ -81,12 +81,12 @@ function subtotal(){
         disccount();
         totalPrice(0);
         return;
-    } 
-    
+    }
+
     const calcSubtotal = cartStore.pizzas.reduce((acc, pizza) => {
         return acc + pizza.getTotal();
     }, 0);
-    
+
     const totalDisccount = disccount(calcSubtotal);
     totalPrice(calcSubtotal, totalDisccount);
     subtotalElement.textContent = `R$ ${calcSubtotal.toFixed(2).replace(".", ",")}`;
@@ -134,7 +134,7 @@ function renderCartContent() {
         </div>
     `;
 
-   
+
 }
 
 function renderEmptyCart() {
@@ -143,9 +143,9 @@ function renderEmptyCart() {
             <h2 class="cart-info">Seu carrinho</h2>
             <h4 id="close-cart">X</h4>
         </div>
-
         <div class="empty-cart">
-            <p>Seu carrinho está vazio 🥺</p>
+            <img src="assets/images/empty-cart.png" alt="empty-cart" >
+            <p>Seu carrinho está vazio</p>
         </div>
     `;
 }

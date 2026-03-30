@@ -26,7 +26,8 @@ export function toggleTheme() {
         ".quantity button",
         ".quantity button p",
         ".pizza-quantity",
-        ".quantity"
+        ".quantity",
+        ".empty-cart p",
     ];
 
     selectors.forEach(selector => {

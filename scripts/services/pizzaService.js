@@ -1,6 +1,6 @@
 import Pizza from "../classes/Pizza.js";
 import { cartStore } from "../store/cartStore.js";
-import { renderOrderCart, updateCartUI } from "./cartService.js";
+import { renderOrderCart, updateCartUI, updatePizzaCounterAtCart } from "./cartService.js";
 import { openModal } from "./modalService.js";
 const quantityDisplay = modal.querySelector(".pizza-quantity");
 const priceElement = document.querySelector(".choosed-price h1");
@@ -113,19 +113,12 @@ function updatePizzaPrice() {
         `R$ ${finalPrice.toFixed(2).replace(".", ",")}`;
 }
 
-function updatePizzaCounter(currentQuantity) {
-    const counter = document.querySelector("#count-pizzas p");
-    const pizzaCount = parseInt(counter.textContent);
-    counter.textContent = pizzaCount + currentQuantity;
-    return;
-}
-
 function handlePizzaAtCartQuantity(action, index) {
     const pizza = cartStore.pizzas[index];
 
     if (action === "+") {
         pizza.sumQuantity(1);
-        updatePizzaCounter(1);
+        updatePizzaCounterAtCart(1);
         renderOrderCart(cartStore.pizzas);
         return;
     }
@@ -137,7 +130,7 @@ function handlePizzaAtCartQuantity(action, index) {
             removalRequest.then(({ isConfirmed }) => {
                 if (isConfirmed) {
                     cartStore.pizzas.splice(index, 1);
-                    updatePizzaCounter(-1);
+                    updatePizzaCounterAtCart(-1);
                     updateCartUI();
                     return;
                     
@@ -147,14 +140,14 @@ function handlePizzaAtCartQuantity(action, index) {
             return;
         }
 
-        updatePizzaCounter(-1);
+        updatePizzaCounterAtCart(-1);
         renderOrderCart(cartStore.pizzas);
     }
 }
 
 export {
     handlePizzaAtCartQuantity,
-    updatePizzaCounter,
+    updatePizzaCounterAtCart,
     updatePizzaPrice,
     getPizzaPrice,
     checkSizeSelection,

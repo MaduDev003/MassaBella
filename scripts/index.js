@@ -1,7 +1,7 @@
 import { toggleTheme } from "./utils/toggleTheme.js";
 import { closeModal, handleModalQuantity } from "./services/modalService.js";
-import { closeCartResume, showCartResume, subtotal, updateCartUI } from "./services/cartService.js";
-import { handlePizzaAtCartQuantity, updatePizzaCounter,checkSizeSelection, selectedPizza, chooseSize, showPizzaAtCart } from "./services/pizzaService.js";
+import { closeCartResume, subtotal, handlePurchase, updatePizzaCounterAtCart, updateCartUI } from "./services/cartService.js";
+import { handlePizzaAtCartQuantity,checkSizeSelection, selectedPizza, chooseSize, showPizzaAtCart } from "./services/pizzaService.js";
 import { cartStore } from "./store/cartStore.js";
 
 const sizeContainer = document.querySelector(".size-options");
@@ -18,7 +18,7 @@ function addOrder() {
     const valid = checkSizeSelection();
     if (!valid) return;
 
-    updatePizzaCounter(cartStore.currentQuantity);
+    updatePizzaCounterAtCart(cartStore.currentQuantity);
     showPizzaAtCart();
     updateCartUI();
     closeModal();
@@ -68,4 +68,11 @@ document.addEventListener("click", (event) => {
 });
 showCart?.addEventListener("click", () => {
     updateCartUI();
+});
+const aside = document.querySelector("aside");
+
+aside.addEventListener("click", (e) => {
+    if (e.target.closest("#purchase")) {
+        handlePurchase();
+    }
 });

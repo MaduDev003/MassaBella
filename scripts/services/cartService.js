@@ -34,7 +34,11 @@ function renderOrderCart(pizzas) {
 
     });
 }
-
+function clearCart() {
+    cartStore.pizzas = [];
+    updateCartUI();
+    updatePizzaCounterAtCart(0);
+}
 function showCartResume(pizzas) {
     renderOrderCart(pizzas);
 
@@ -46,6 +50,17 @@ function showCartResume(pizzas) {
 function closeCartResume() {
     aside.style.display = "none";
     document.body.classList.remove("cart-open");
+}
+
+function updatePizzaCounterAtCart(currentQuantity) {
+     const counter = document.querySelector("#count-pizzas p");
+    if (currentQuantity < 1){
+        counter.textContent = 0;
+        return;
+    };
+    const pizzaCount = parseInt(counter.textContent);
+    counter.textContent = pizzaCount + currentQuantity;
+    return;
 }
 
 function disccount(subtotal) {
@@ -163,11 +178,67 @@ function updateCartUI() {
     document.body.classList.add("cart-open");
 }
 
+function handlePurchase() {
+    if (!cartStore.pizzas.length) {
+        alert("Carrinho vazio 😢");
+        return;
+    }
+
+   let message = "*MASSA BELLA*\n";
+
+    cartStore.pizzas.forEach(pizza => {
+        message += `• ${pizza.flavor} (${pizza.size}) x${pizza.quantity}\n`;
+    });
+
+    const subtotal = cartStore.pizzas.reduce((acc, pizza) => acc + pizza.getTotal(), 0);
+    const desconto = subtotal * 0.1;
+    const total = subtotal - desconto;
+
+    message += `\nSubtotal: R$ ${subtotal.toFixed(2)}`;
+    message += `\nDesconto: R$ ${desconto.toFixed(2)}`;
+    message += `\nTotal: R$ ${total.toFixed(2)}`;
+    message += `\n\nObrigado por comprar na Massa Bella!`;
+
+    showOptions(message);
+}
+
+function showOptions(message) {
+    Swal.fire({
+        title: "Finalizar pedido",
+        text: "Escolha como deseja enviar",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "WhatsApp 📲",
+        denyButtonText: "Copiar 📋",
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            sendWhatsApp(message);
+            clearCart();
+        } else if (result.isDenied) {
+            copyToClipboard(message);
+            clearCart();
+        }
+    });
+}
+
+function sendWhatsApp(message) {
+    const url = "https://wa.me/?text=" + encodeURIComponent(message);
+    window.open(url, "_blank");
+}
+
+function copyToClipboard(message) {
+    navigator.clipboard.writeText(message);
+    alert("Pedido copiado! 📋");
+}
+
 export {
     closeCartResume,
     renderOrderCart,
     showCartResume,
     subtotal,
     disccount,
-    updateCartUI
+    updateCartUI,
+    updatePizzaCounterAtCart,
+    handlePurchase
 };

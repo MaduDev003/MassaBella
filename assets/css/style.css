@@ -771,7 +771,7 @@ hr:nth-child(3){
 
 }
 
-@media (min-width: 600px) {
+@media (min-width: 600px) and (max-width: 900px) {
       #modal {
     width: 90vw;     
     height: auto;  

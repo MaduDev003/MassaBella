@@ -28,6 +28,8 @@ export function toggleTheme() {
         ".pizza-quantity",
         ".quantity",
         ".empty-cart p",
+        ".resume-info hr",
+        ".resume-info .info h3"
     ];
 
     selectors.forEach(selector => {

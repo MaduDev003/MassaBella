@@ -1,0 +1,1 @@
+<a href="https://iconscout.com/illustrations/empty-cart" class="text-underline font-size-sm" target="_blank">Empty cart</a> by <a href="https://iconscout.com/contributors/iconscout" class="text-underline font-size-sm" target="_blank">IconScout Store</a>

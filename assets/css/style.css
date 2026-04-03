@@ -680,6 +680,11 @@ body.cart-open .container {
   flex-direction: column;
   gap: 10px;
 }
+
+.resume-info .info h3.dark {
+    color: pink
+}
+
 hr {
     margin-top: 15px;
     border: none;
@@ -687,6 +692,10 @@ hr {
     background-color: #7fabc2;
     opacity: 0.6;
     width: 100%;
+}
+
+.resume-info hr.dark {
+    color: pink
 }
 
 hr:nth-child(3){
@@ -747,4 +756,130 @@ hr:nth-child(3){
 
 .empty-cart img {
     width: 250px;
+}
+
+@media (max-width: 900px) {
+  aside {
+    position: fixed;   
+    top: 0;
+    left: 0;
+    width: 100vw;      
+    height: 100vh; 
+    z-index: 2;      
+  }
+
+
+}
+
+@media (min-width: 600px) {
+      #modal {
+    width: 90vw;     
+    height: auto;  
+    justify-content: center;
+    padding: 10px;
+    align-items: center;  
+    top: 50%;        
+    left: 50%;       
+    transform: translate(-50%, -50%); 
+  }
+
+  .choosed-pizza img {
+    width: 80%;
+  }
+
+  .pizza-description {
+    padding: 0px;
+    gap: 13px;
+  }
+}
+
+
+@media (max-width: 500px) {
+    header {
+        padding: 0px;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+
+  #modal {
+    flex-direction: column;
+    width: 90vw;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pizza-description {
+    padding: 6px;
+    gap: 13px;
+    width: 100%;
+  }
+
+  .choosed-pizza img {
+    width: 90%;
+  }
+
+  .size-options {
+    width: 100%;
+    gap: 1px;
+    flex-direction: column;
+    height: 110px;
+  }
+
+  .choosed-price {
+    font-size: 20px;
+  }
+
+  .confirm p {
+    font-size: 12px;
+  }
+
+  .choosed-pizza {
+    margin-top: 30px;
+  }
+
+  #count-pizzas{
+        right: 117px;
+    top: 13px;
+  }
+}
+
+
+@media (min-width: 350px) and (max-width: 500px) {
+  #modal {
+    height: 600px;
+  }
+
+  
+}
+
+@media (max-width: 340px) {
+    #modal{
+        height: 400px;
+    }
+    .pizza-description h1 {
+    font-size: 20px;
+  }
+
+  .choosed-pizza img {
+    display: none;
+  }
+  .size-options{
+    gap: 1px;
+    height: 85px;
+  }
+
+  .modal-action{
+    height: 42px;
+    margin-top: 10px;
+  }
+
+  .modal-action .confirm p {
+    font-size: 10px;
+  }
+
+  aside .confirm p {
+    font-size: 17px;
+  }
 }

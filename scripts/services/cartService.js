@@ -54,10 +54,7 @@ function closeCartResume() {
 
 function updatePizzaCounterAtCart(currentQuantity) {
      const counter = document.querySelector("#count-pizzas p");
-    if (currentQuantity < 1){
-        counter.textContent = 0;
-        return;
-    };
+ 
     const pizzaCount = parseInt(counter.textContent);
     counter.textContent = pizzaCount + currentQuantity;
     return;

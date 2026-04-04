@@ -694,9 +694,16 @@ hr {
     width: 100%;
 }
 
-.resume-info hr.dark {
-    color: pink
+
+body.dark hr {
+  background-color: #9c9c9c;
 }
+
+body.dark .info h3 {
+  color: #9c9c9c;
+}
+
+
 
 hr:nth-child(3){
    margin-top: 5px;

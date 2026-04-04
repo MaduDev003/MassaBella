@@ -1,6 +1,8 @@
-# Massa Bella - Pizzaria Web
+# 🍕 Massa Bella - Pizzaria Web
 
 Aplicação web de uma pizzaria que simula a experiência de pedidos online, permitindo ao usuário escolher pizzas, gerenciar o carrinho e visualizar o resumo da compra em tempo real.
+
+**🔗 [Acesse a aplicação online](https://seu-link.vercel.app)**
 
 ## Funcionalidades
 
@@ -31,9 +33,6 @@ Este projeto foi desenvolvido com foco em:
 * Construção de interfaces interativas
 * Aplicação de responsividade e experiência do usuário
 
-## Preview
-
-Adicione aqui imagens ou GIFs do projeto.
 
 ## Como executar
 

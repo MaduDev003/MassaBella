@@ -6,7 +6,7 @@
 
 Aplicação web de uma pizzaria que simula a experiência de pedidos online, permitindo ao usuário escolher pizzas, gerenciar o carrinho e visualizar o resumo da compra em tempo real.
 
-**🔗 [Acesse a aplicação online](https://seu-link.vercel.app)**
+**🔗 [Acesse a aplicação online](https://massa-bella.vercel.app/)**
 
 
 ## Funcionalidades

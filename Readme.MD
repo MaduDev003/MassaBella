@@ -1,8 +1,14 @@
 # 🍕 Massa Bella - Pizzaria Web
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![Deploy](https://img.shields.io/badge/Deploy-Vercel-000?style=flat&logo=vercel&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 Aplicação web de uma pizzaria que simula a experiência de pedidos online, permitindo ao usuário escolher pizzas, gerenciar o carrinho e visualizar o resumo da compra em tempo real.
 
-**🔗 [Acesse a aplicação online](https://massa-bella.vercel.app/)**
+**🔗 [Acesse a aplicação online](https://seu-link.vercel.app)**
+
 
 ## Funcionalidades
 
